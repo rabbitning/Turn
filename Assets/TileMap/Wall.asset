@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wall
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 3244e45dce2b7a14683c05e98a577257, type: 3}
-  m_Color: {r: 0.4811321, g: 0.25110698, b: 0.12482201, a: 1}
+  m_Color: {r: 0.41509432, g: 0.32306868, b: 0.39171076, a: 1}
   m_Transform:
     e00: 1
     e01: 0
