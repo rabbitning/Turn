@@ -128,14 +128,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         rb.velocity = moveSet.currentSpeed = Vector2.zero;
 
+        animator.SetBool("isSS", currentView);
+
         foreach (GameObject gameObject in sideViewActiveObject)
-        {
             gameObject.SetActive(currentView);
-        }
+
         foreach (GameObject gameObject in topViewActiveObject)
-        {
             gameObject.SetActive(!currentView);
-        }
 
         if (currentView)
         {
