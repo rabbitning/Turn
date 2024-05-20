@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1Controller : MonoBehaviour, IDamageable
+public class Enemy1Controller : Monster, IDamageable
 {
     [SerializeField] float maxHp = 0;
     public float MaxHp { get => maxHp; }
@@ -19,13 +19,13 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     }
 
     Action move = null;
-    Rigidbody2D rb = null;
+    // Animator animator = null;
+    // Rigidbody2D rb = null;
 
-    void Start()
+    new void Start()
     {
+        base.Start();
         GameManager.gameManager.OnViewChanged.AddListener(ViewChanged);
-
-        rb = GetComponent<Rigidbody2D>();
 
         hp = MaxHp;
 
@@ -39,11 +39,13 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
 
     void FixedUpdate()
     {
-        
+
     }
 
-    void ViewChanged(bool currentView)
+    new void ViewChanged(bool currentView)
     {
+        base.ViewChanged(currentView);
+
         rb.velocity = Vector2.zero;
 
         if (currentView)
