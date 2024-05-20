@@ -19,6 +19,5 @@ public class Monster : MonoBehaviour
     protected void ViewChanged(bool currentView)
     {
         animator?.SetBool("isSS", currentView);
-        Debug.Log("sw");
     }
 }
