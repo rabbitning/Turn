@@ -191,9 +191,9 @@ MonoBehaviour:
   _viewChangeSprites: []
   DefaultStatsData:
   - Name: 0
-    Value: 10
+    Value: 200
   - Name: 1
-    Value: 10
+    Value: 200
   - Name: 4
     Value: 4
   - Name: 7

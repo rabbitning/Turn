@@ -77,14 +77,6 @@ MonoBehaviour:
   _wallRuleTileCurrent: {fileID: 11400000, guid: 752aba231607cf641982256187db25f7, type: 2}
   _wallRuleTileSS: {fileID: 11400000, guid: 5c684171e0f1e294a9fd88b388dd1605, type: 2}
   _wallRuleTileTD: {fileID: 11400000, guid: 8cd52b5b62e03694f9fcab5eb2e73008, type: 2}
-  _switchGroundTilemap: {fileID: 8986475817083645582}
-  _switchGroundRuleTileCurrent: {fileID: 11400000, guid: cc618609d6adc8c42b9f0fa1d9365f19, type: 2}
-  _switchGroundRuleTileSS: {fileID: 11400000, guid: 2db23e627f374b1448cbd319033e6116, type: 2}
-  _switchGroundRuleTileTD: {fileID: 11400000, guid: ba233617ec5a3704589d61fdda903029, type: 2}
-  _switchWallTilemap: {fileID: 8986475817902651122}
-  _switchWallRuleTileCurrent: {fileID: 11400000, guid: ac349ed145ecb8942a146235bf51e886, type: 2}
-  _switchWallRuleTileSS: {fileID: 11400000, guid: 23b9ff5b1ec232147a8db90f82700ba6, type: 2}
-  _switchWallRuleTileTD: {fileID: 11400000, guid: 9bd5c58430480e548845d6d05585112a, type: 2}
 --- !u!1 &8986475817013117930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,9 +1408,9 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 9.7777e-41, g: 9.7777e-41, b: 9.7777e-41, a: 9.7777e-41}
+    m_Data: {r: 5.5794e-41, g: 5.5794e-41, b: 5.5794e-41, a: 5.5794e-41}
   - m_RefCount: 8
-    m_Data: {r: 0.7083858, g: 0.49107134, b: 0.56316906, a: 1}
+    m_Data: {r: 0.7255817, g: 0.46789038, b: 0.4828655, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1551,12 +1543,12 @@ CompositeCollider2D:
     m_Paths:
     - - {x: 19, y: 2}
       - {x: 15, y: 2}
-      - {x: 15, y: 1.6010001}
-      - {x: 19, y: 1.6010001}
+      - {x: 15, y: 1}
+      - {x: 19, y: 1}
     - - {x: 13, y: 0}
       - {x: 9, y: 0}
-      - {x: 9, y: -0.39900002}
-      - {x: 13, y: -0.39900002}
+      - {x: 9, y: -1}
+      - {x: 13, y: -1}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0
 --- !u!251 &8986475818265198539

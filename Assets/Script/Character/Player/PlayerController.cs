@@ -220,7 +220,10 @@ public class PlayerController : Character, IDamageable
     {
         _wallCheckDataSS.IsBlockedByWall.x = Physics2D.OverlapBox(_rb.position + new Vector2(_wallCheckDataSS.WallCheckOffsetX.x * Mathf.Sign(_inputData.MoveInput.x), _wallCheckDataSS.WallCheckOffsetX.y), _wallCheckDataSS.WallCheckSizeX, 0, _wallCheckDataSS.WallLayer);
         _wallCheckDataTD.IsBlockedByWall.x = Physics2D.OverlapBox(_rb.position + new Vector2(_wallCheckDataTD.WallCheckOffsetX.x * Mathf.Sign(_inputData.MoveInput.x), _wallCheckDataTD.WallCheckOffsetX.y), _wallCheckDataTD.WallCheckSizeX, 0, _wallCheckDataTD.WallLayer);
-        _wallCheckDataTD.IsBlockedByWall.y = Physics2D.OverlapBox(_rb.position + new Vector2(_wallCheckDataTD.WallCheckOffsetY.x, _wallCheckDataTD.WallCheckOffsetY.y * Mathf.Sign(_inputData.MoveInput.y)), _wallCheckDataTD.WallCheckSizeY, 0, _wallCheckDataTD.WallLayer);
+        if (Mathf.Sign(_inputData.MoveInput.y) < 0)
+            _wallCheckDataTD.IsBlockedByWall.y = Physics2D.OverlapBox(_rb.position, _wallCheckDataTD.WallCheckSizeY, 0, _wallCheckDataSS.WallLayer);
+        else
+            _wallCheckDataTD.IsBlockedByWall.y = Physics2D.OverlapBox(_rb.position + _wallCheckDataTD.WallCheckOffsetY, _wallCheckDataTD.WallCheckSizeY, 0, _wallCheckDataTD.WallLayer);
     }
 
     protected override void MoveInSS()
@@ -260,7 +263,7 @@ public class PlayerController : Character, IDamageable
     {
         if (!_groundCheckDataTD.IsGrounded && CurrentStatsData[StatName.Invincible] == 0)
         {
-            Damage(20);
+            Damage(10);
             if (CurrentStatsData[StatName.Health] > 0) StartCoroutine(CResetPlayerPosition(_groundCheckDataTD.LastGroundedPosition));
         }
 

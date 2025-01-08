@@ -42,10 +42,10 @@ public class ChipsMenuManager : MonoBehaviour
             {
                 foreach (ChipButtonController chipButton in _chipsListMenu.GetComponentsInChildren<ChipButtonController>())
                 {
-                    Debug.Log("Chip: " + chipButton.Chip.name);
+                    // Debug.Log("Chip: " + chipButton.Chip.name);
                     if (chipButton.Chip == _player.EquippedChips[i])
                     {
-                        Debug.Log("Equipped: " + chipButton.Chip.name);
+                        // Debug.Log("Equipped: " + chipButton.Chip.name);
                         chipButton.OnClick();
                         break;
                     }

@@ -23,6 +23,10 @@ public class BulletController : EffectByViewChange
         if (other.TryGetComponent(out IDamageable damageable))
         {
             damageable.Damage(Damage);
+            if (other.TryGetComponent(out Enemy enemy))
+            {
+                enemy.Knockback(_rb.velocity.normalized, Damage * 2);
+            }
         }
         End();
     }

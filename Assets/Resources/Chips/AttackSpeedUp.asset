@@ -24,3 +24,7 @@ MonoBehaviour:
       Name: 6
       Value: 1
     SetType: 3
+  - StatData:
+      Name: 7
+      Value: 2
+    SetType: 3
