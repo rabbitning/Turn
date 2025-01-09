@@ -1,43 +1,43 @@
 using UnityEngine;
-using UnityEngine.UI;
+// using UnityEngine.UI;
 
 public class EquippedChipsButtonController : MonoBehaviour
 {
-    [HideInInspector] public ChipsMenuManager ChipsMenuManager = null;
-    [HideInInspector] public ChipButtonController SourceChipButton = null;
-    Button _button = null;
+//     [HideInInspector] public ChipsMenuManager ChipsMenuManager = null;
+//     [HideInInspector] public ChipButtonController SourceChipButton = null;
+//     Button _button = null;
 
-    void Start()
-    {
-        _button = GetComponent<Button>();
-        _button.interactable = false;
-        _button.onClick.AddListener(OnClick);
-        _button.GetComponent<Image>().sprite = Resources.Load<Sprite>("Chips/ChipsArt/DefaultChipIcon");
-    }
+//     void Start()
+//     {
+//         _button = GetComponent<Button>();
+//         _button.interactable = false;
+//         _button.onClick.AddListener(OnClick);
+//         _button.GetComponent<Image>().sprite = Resources.Load<Sprite>("Chips/ChipsArt/DefaultChipIcon");
+//     }
 
-    void OnClick()
-    {
-        ChipsMenuManager.UnequippedChip(SourceChipButton);
-        SetButtonInteractable(false);
-    }
+//     void OnClick()
+//     {
+//         ChipsMenuManager.UnequippedChip(SourceChipButton);
+//         SetButtonInteractable(false);
+//     }
 
 
-    public void SetChip(ChipButtonController chipButtonController)
-    {
-        if (chipButtonController == null)
-        {
-            SourceChipButton = null;
-            _button.GetComponent<Image>().sprite = Resources.Load<Sprite>("Chips/ChipsArt/DefaultChipIcon");
-            return;
-        }
+//     public void SetChip(ChipButtonController chipButtonController)
+//     {
+//         if (chipButtonController == null)
+//         {
+//             SourceChipButton = null;
+//             _button.GetComponent<Image>().sprite = Resources.Load<Sprite>("Chips/ChipsArt/DefaultChipIcon");
+//             return;
+//         }
 
-        SourceChipButton = chipButtonController;
-        _button.GetComponent<Image>().sprite = SourceChipButton.Chip.ChipIcon;
-        SetButtonInteractable(true);
-    }
+//         SourceChipButton = chipButtonController;
+//         _button.GetComponent<Image>().sprite = SourceChipButton.Chip.ChipIcon;
+//         SetButtonInteractable(true);
+//     }
 
-    public void SetButtonInteractable(bool interactable)
-    {
-        _button.interactable = interactable;
-    }
+//     public void SetButtonInteractable(bool interactable)
+//     {
+//         _button.interactable = interactable;
+//     }
 }

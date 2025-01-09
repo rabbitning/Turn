@@ -48,9 +48,9 @@ public class MenuUIController : UIController
 
         _chipsMenuPanel.SetActive(!_chipsMenuPanel.activeSelf);
 
-        if (!_chipsMenuPanel.activeSelf)
-        {
-            _chipsMenuPanel.GetComponent<ChipsMenuManager>().ApplyChips();
-        }
+        // if (!_chipsMenuPanel.activeSelf)
+        // {
+        //     _chipsMenuPanel.GetComponent<ChipsMenuManager>().ApplyChips();
+        // }
     }
 }

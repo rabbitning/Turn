@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 2799664363001944497}
   - component: {fileID: 2799664363001944502}
   - component: {fileID: 2799664363001944503}
+  - component: {fileID: 1450049694}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -495,7 +496,7 @@ MonoBehaviour:
     Size: {x: 0.6, y: 1.3}
     Offset: {x: 0, y: 0.65}
   _colliderDataTD:
-    ShowGizmos: 1
+    ShowGizmos: 0
     Size: {x: 0.6, y: 0.5}
     Offset: {x: 0, y: 0.25}
   _movementData:
@@ -515,13 +516,13 @@ MonoBehaviour:
     GroundCheckSize: {x: 0.5, y: 0.1}
     LastGroundedPosition: {x: 26.390003, y: -0.99255013}
   _groundCheckDataTD:
-    ShowGizmos: 0
+    ShowGizmos: 1
     IsGrounded: 1
     GroundLayer:
       serializedVersion: 2
       m_Bits: 128
     GroundCheckOffset: {x: 0, y: 0.25}
-    GroundCheckSize: {x: 0.5, y: 0.5}
+    GroundCheckSize: {x: 0.5, y: 0.4}
     LastGroundedPosition: {x: 26.390003, y: -0.99255013}
   _wallCheckDataSS:
     ShowGizmos: 0
@@ -536,7 +537,7 @@ MonoBehaviour:
     WallCheckOffsetY: {x: 0, y: 0}
     WallCheckSizeY: {x: 0, y: 0}
   _wallCheckDataTD:
-    ShowGizmos: 1
+    ShowGizmos: 0
     IsBlockedByWall:
       x: 0
       y: 0
@@ -560,3 +561,20 @@ MonoBehaviour:
     Damage: 1
     AttackCooldown: 0.3
     AttackCooldownTimer: -336.62396
+--- !u!114 &1450049694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799664363001944501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f458c7f113dfd6d40808c910b0089e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AvailableChips: []
+  EquippedChips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

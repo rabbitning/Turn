@@ -15,4 +15,6 @@ public abstract class Chips : ScriptableObject
         ChipName ??= "Default Chip Name";
         ChipDescription ??= "Default Chip Description";
     }
+
+    public abstract void Active(PlayerController player);
 }
