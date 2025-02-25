@@ -376,7 +376,7 @@ public class PlayerController : Character, IDamageable
         if (CurrentStatsData[StatName.Invincible] > 0) return;
 
         SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.Health] - value);
-        StartCoroutine(CSetInvincible(0.2f));
+        StartCoroutine(CSetInvincible(1f));
 
         if (CurrentStatsData[StatName.Health] <= 0)
         {

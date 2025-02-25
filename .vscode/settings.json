@@ -51,5 +51,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "PS2D.sln"
+    "dotnet.defaultSolution": "PS2D.sln",
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorStyleInactive": "none"
 }
