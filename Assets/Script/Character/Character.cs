@@ -16,18 +16,33 @@ public abstract class Character : EffectByViewChange
 
         value = Mathf.Max(value, 0);
 
-        CurrentStatsData[statName] = statName switch
+        switch (statName)
         {
-            StatName.Health => Mathf.Min(value, CurrentStatsData[StatName.MaxHealth]),
-            StatName.Shield => Mathf.Min(value, CurrentStatsData[StatName.MaxShield]),
-            StatName.Invincible => value == 0 ? 0 : 1,
-            _ => value
-        };
+            case StatName.MaxHealth:
+                CurrentStatsData[StatName.MaxHealth] = value;
+                SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.Health]);
+                break;
+            case StatName.Health:
+                CurrentStatsData[StatName.Health] = Mathf.Min(value, CurrentStatsData[StatName.MaxHealth]);
+                break;
+            case StatName.MaxShield:
+                CurrentStatsData[StatName.MaxShield] = value;
+                SetCurrentStatsData(StatName.Shield, CurrentStatsData[StatName.Shield]);
+                break;
+            case StatName.Shield:
+                CurrentStatsData[StatName.Shield] = Mathf.Min(value, CurrentStatsData[StatName.MaxShield]);
+                break;
+            case StatName.Invincible:
+                CurrentStatsData[StatName.Invincible] = value == 0 ? 0 : 1;
+                break;
+            default:
+                CurrentStatsData[statName] = value;
+                break;
+        }
     }
 
-    protected override void Start()
+    protected virtual void Awake()
     {
-        base.Start();
         foreach (StatData stat in DefaultStatsData) CurrentStatsData.TryAdd(stat.Name, stat.Value);
     }
 

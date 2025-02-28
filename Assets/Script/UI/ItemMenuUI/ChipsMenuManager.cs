@@ -1,57 +1,62 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChipsMenuManager : MonoBehaviour
 {
+    [SerializeField] GameObject _chipButtonPrefab = null;
 
     [Header("Equipped Chips")]
 
-    [SerializeField] Transform _equippedChipsMenu = null;
-    [SerializeField] EquippedChipsButtonController _equippedChipsButtonPrefab = null;
-    EquippedChipsButtonController[] _newEquippedChips = new EquippedChipsButtonController[3];
+    [SerializeField] Transform _equippedChipsPanel = null;
+    // [SerializeField] EquippedChipsButtonController _equippedChipsButtonPrefab = null;
+    // EquippedChipsButtonController[] _newEquippedChips = new EquippedChipsButtonController[3];
 
     [Header("Chips List")]
 
-    [SerializeField] Transform _chipsListMenu = null;
-    [SerializeField] ChipButtonController _chipButtonPrefab = null;
-    [SerializeField] List<Chips> _chipsList = null;
+    [SerializeField] Transform _availableChipsPanel = null;
+    // [SerializeField] ChipButtonController _chipButtonPrefab = null;
+    // [SerializeField] List<Chips> _chipsList = null;
 
     PlayerController _player = null;
+    PlayerChipManager _playerChipManager;
 
     void Start()
     {
         _player = GameManager.Instance.Player;
+        _playerChipManager = _player.GetComponent<PlayerChipManager>();
 
-        for (int i = 0; i < _newEquippedChips.Length; i++)
-        {
-            _newEquippedChips[i] = Instantiate(_equippedChipsButtonPrefab, _equippedChipsMenu);
-            _newEquippedChips[i].ChipsMenuManager = this;
-        }
+        PopulateAvailableChips();
+        PopulateEquippedChips();
+        // for (int i = 0; i < _newEquippedChips.Length; i++)
+        // {
+        //     _newEquippedChips[i] = Instantiate(_equippedChipsButtonPrefab, _equippedChipsMenu);
+        //     _newEquippedChips[i].ChipsMenuManager = this;
+        // }
 
-        _chipsList = new List<Chips>(Resources.LoadAll<Chips>("Chips"));
-        foreach (Chips chip in _chipsList)
-        {
-            ChipButtonController chipButtonController = Instantiate(_chipButtonPrefab, _chipsListMenu);
-            chipButtonController.ChipsMenuManager = this;
-            chipButtonController.Chip = chip;
-        }
+        // _chipsList = new List<Chips>(Resources.LoadAll<Chips>("Chips"));
+        // foreach (Chips chip in _chipsList)
+        // {
+        //     ChipButtonController chipButtonController = Instantiate(_chipButtonPrefab, _chipsListMenu);
+        //     chipButtonController.ChipsMenuManager = this;
+        //     chipButtonController.Chips = chip;
+        // }
 
-        for (int i = 0; i < _newEquippedChips.Length; i++)
-        {
-            if (_player.EquippedChips[i] != null)
-            {
-                foreach (ChipButtonController chipButton in _chipsListMenu.GetComponentsInChildren<ChipButtonController>())
-                {
-                    Debug.Log("Chip: " + chipButton.Chip.name);
-                    if (chipButton.Chip == _player.EquippedChips[i])
-                    {
-                        Debug.Log("Equipped: " + chipButton.Chip.name);
-                        chipButton.OnClick();
-                        break;
-                    }
-                }
-            }
-        }
+        // for (int i = 0; i < _newEquippedChips.Length; i++)
+        // {
+        //     if (_player.EquippedChips[i] != null)
+        //     {
+        //         foreach (ChipButtonController chipButton in _chipsListMenu.GetComponentsInChildren<ChipButtonController>())
+        //         {
+        //             if (chipButton.Chips == _player.EquippedChips[i])
+        //             {
+        //                 chipButton.OnClick();
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     // void OnEnable()
@@ -61,46 +66,108 @@ public class ChipsMenuManager : MonoBehaviour
 
     // }
 
-    public bool EquippedChip(ChipButtonController chipButtonController)
+    private void PopulateAvailableChips()
     {
-        for (int i = 0; i < _newEquippedChips.Length; i++)
+        foreach (Chips chip in _playerChipManager.AvailableChips)
         {
-            if (_newEquippedChips[i].SourceChipButton == null)
+            GameObject chipButton = Instantiate(_chipButtonPrefab, _availableChipsPanel);
+            chipButton.GetComponentInChildren<TextMeshProUGUI>().text = chip.ChipName;
+            chipButton.GetComponent<Image>().sprite = chip.ChipIcon;
+            chipButton.GetComponent<Button>().onClick.AddListener(() => OnChipSelected(chip));
+        }
+    }
+
+    private void PopulateEquippedChips()
+    {
+        for (int i = 0; i < _playerChipManager.EquippedChips.Length; i++)
+        {
+            Chips chip = _playerChipManager.EquippedChips[i];
+            GameObject chipButton = Instantiate(_chipButtonPrefab, _equippedChipsPanel);
+            chipButton.GetComponentInChildren<TextMeshProUGUI>().text = chip != null ? chip.ChipName : "Empty";
+            chipButton.GetComponent<Image>().sprite = chip != null ? chip.ChipIcon : null;
+            int slotIndex = i;
+            chipButton.GetComponent<Button>().onClick.AddListener(() => OnEquippedChipSelected(slotIndex));
+        }
+    }
+
+    private void OnChipSelected(Chips chip)
+    {
+        // 檢查是否已經裝備了相同的晶片
+        for (int i = 0; i < _playerChipManager.EquippedChips.Length; i++)
+        {
+            if (_playerChipManager.EquippedChips[i] == chip)
             {
-                _newEquippedChips[i].SetChip(chipButtonController);
-                return true;
+                Debug.LogWarning("Cannot equip the same chip multiple times.");
+                return;
             }
         }
-        return false;
-    }
 
-    public void UnequippedChip(ChipButtonController chipButtonController)
-    {
-        for (int i = 0; i < _newEquippedChips.Length; i++)
+        for (int i = 0; i < _playerChipManager.EquippedChips.Length; i++)
         {
-            if (_newEquippedChips[i].SourceChipButton == null) continue;
-
-            if (_newEquippedChips[i].SourceChipButton.Chip == chipButtonController.Chip)
+            if (_playerChipManager.EquippedChips[i] == null)
             {
-                chipButtonController.SetButtonInteractable(true);
-                _newEquippedChips[i].SetChip(null);
-                break;
+                _playerChipManager.EquipChip(i, chip);
+                UpdateEquippedChipsUI();
+                return;
             }
         }
     }
 
-    public void ApplyChips()
+    private void OnEquippedChipSelected(int slotIndex)
     {
-        Chips[] newChips = new Chips[_newEquippedChips.Length];
-
-        for (int i = 0; i < newChips.Length; i++)
-        {
-            if (_newEquippedChips[i] != null)
-                if (_newEquippedChips[i].SourceChipButton != null)
-                    if (_newEquippedChips[i].SourceChipButton.Chip != null)
-                        newChips[i] = _newEquippedChips[i].SourceChipButton.Chip;
-        }
-        _player.UpdateChips(newChips);
-        // gameObject.SetActive(false);
+        _playerChipManager.UnequipChip(slotIndex);
+        UpdateEquippedChipsUI();
     }
+
+    private void UpdateEquippedChipsUI()
+    {
+        foreach (Transform child in _equippedChipsPanel)
+        {
+            Destroy(child.gameObject);
+        }
+        PopulateEquippedChips();
+    }
+
+    // public bool EquippedChip(ChipButtonController chipButtonController)
+    // {
+    //     for (int i = 0; i < _newEquippedChips.Length; i++)
+    //     {
+    //         if (_newEquippedChips[i].SourceChipButton == null)
+    //         {
+    //             _newEquippedChips[i].SetChip(chipButtonController);
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    // public void UnequippedChip(ChipButtonController chipButtonController)
+    // {
+    //     for (int i = 0; i < _newEquippedChips.Length; i++)
+    //     {
+    //         if (_newEquippedChips[i].SourceChipButton == null) continue;
+
+    //         if (_newEquippedChips[i].SourceChipButton.Chip == chipButtonController.Chip)
+    //         {
+    //             chipButtonController.SetButtonInteractable(true);
+    //             _newEquippedChips[i].SetChip(null);
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // public void ApplyChips()
+    // {
+    //     Chips[] newChips = new Chips[_newEquippedChips.Length];
+
+    //     for (int i = 0; i < newChips.Length; i++)
+    //     {
+    //         if (_newEquippedChips[i] != null)
+    //             if (_newEquippedChips[i].SourceChipButton != null)
+    //                 if (_newEquippedChips[i].SourceChipButton.Chip != null)
+    //                     newChips[i] = _newEquippedChips[i].SourceChipButton.Chip;
+    //     }
+    //     _player.UpdateChips(newChips);
+    //     // gameObject.SetActive(false);
+    // }
 }

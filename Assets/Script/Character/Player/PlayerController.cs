@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : Character, IDamageable
 {
     public static PlayerController Instance = null;
-    public Chips[] EquippedChips { get; private set; } = new Chips[3];
+    // public Chips[] EquippedChips { get; private set; } = new Chips[3];
 
     #region Data Structures
 
@@ -45,11 +45,13 @@ public class PlayerController : Character, IDamageable
     BoxCollider2D _col = null;
     Animator _animator = null;
     SpriteRenderer _playerSpriteRenderer = null;
+    PlayerChipManager _chipManager = null;
 
     #endregion
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -65,18 +67,12 @@ public class PlayerController : Character, IDamageable
         _inputData.CanInput = true;
     }
 
-    protected override void Start()
-    {
-        base.Start();
-        PlayerData.Load();
-    }
-
     void Update()
     {
         HandleInput();
         _attack?.Invoke();
         _updateAnimationState?.Invoke();
-        ActiveSkill();
+        // ActiveSkill();
         CheckInvincible();
     }
 
@@ -138,9 +134,12 @@ public class PlayerController : Character, IDamageable
 
         _inputData.MousePosInput = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetKeyDown(KeyCode.E)) _inputData.SkillInput[0] = true;
-        if (Input.GetKeyDown(KeyCode.Q)) _inputData.SkillInput[1] = true;
-        if (Input.GetKeyDown(KeyCode.C)) _inputData.SkillInput[2] = true;
+        if (Input.GetKey(KeyCode.E)) _chipManager.ActiveChip(0);
+        // _inputData.SkillInput[0] = true;
+        if (Input.GetKey(KeyCode.Q)) _chipManager.ActiveChip(1);
+        // _inputData.SkillInput[1] = true;
+        if (Input.GetKey(KeyCode.C)) _chipManager.ActiveChip(2);
+        // _inputData.SkillInput[2] = true;
     }
 
     void ResetInput()
@@ -220,7 +219,10 @@ public class PlayerController : Character, IDamageable
     {
         _wallCheckDataSS.IsBlockedByWall.x = Physics2D.OverlapBox(_rb.position + new Vector2(_wallCheckDataSS.WallCheckOffsetX.x * Mathf.Sign(_inputData.MoveInput.x), _wallCheckDataSS.WallCheckOffsetX.y), _wallCheckDataSS.WallCheckSizeX, 0, _wallCheckDataSS.WallLayer);
         _wallCheckDataTD.IsBlockedByWall.x = Physics2D.OverlapBox(_rb.position + new Vector2(_wallCheckDataTD.WallCheckOffsetX.x * Mathf.Sign(_inputData.MoveInput.x), _wallCheckDataTD.WallCheckOffsetX.y), _wallCheckDataTD.WallCheckSizeX, 0, _wallCheckDataTD.WallLayer);
-        _wallCheckDataTD.IsBlockedByWall.y = Physics2D.OverlapBox(_rb.position + new Vector2(_wallCheckDataTD.WallCheckOffsetY.x, _wallCheckDataTD.WallCheckOffsetY.y * Mathf.Sign(_inputData.MoveInput.y)), _wallCheckDataTD.WallCheckSizeY, 0, _wallCheckDataTD.WallLayer);
+        if (Mathf.Sign(_inputData.MoveInput.y) < 0)
+            _wallCheckDataTD.IsBlockedByWall.y = Physics2D.OverlapBox(_rb.position, _wallCheckDataTD.WallCheckSizeY, 0, _wallCheckDataSS.WallLayer);
+        else
+            _wallCheckDataTD.IsBlockedByWall.y = Physics2D.OverlapBox(_rb.position + _wallCheckDataTD.WallCheckOffsetY, _wallCheckDataTD.WallCheckSizeY, 0, _wallCheckDataTD.WallLayer);
     }
 
     protected override void MoveInSS()
@@ -260,7 +262,7 @@ public class PlayerController : Character, IDamageable
     {
         if (!_groundCheckDataTD.IsGrounded && CurrentStatsData[StatName.Invincible] == 0)
         {
-            Damage(20);
+            Damage(10);
             if (CurrentStatsData[StatName.Health] > 0) StartCoroutine(CResetPlayerPosition(_groundCheckDataTD.LastGroundedPosition));
         }
 
@@ -286,89 +288,95 @@ public class PlayerController : Character, IDamageable
 
     public void UpdateChips(Chips[] newChips)
     {
+
+
         foreach (var stat in DefaultStatsData)
         {
-            switch (stat.Name)
-            {
-                // case StatName.Health:
-                // case StatName.Shield:
-                //     break;
-                default:
-                    SetCurrentStatsData(stat.Name, stat.Value);
-                    break;
-            }
+            //     switch (stat.Name)
+            //     {
+            //         // case StatName.Health:
+            //         // case StatName.Shield:
+            //         //     break;
+            //         default:
+            SetCurrentStatsData(stat.Name, stat.Value);
+            //             break;
+            //     }
         }
-        _inputData.SkillInput = new bool3();
+        // _inputData.SkillInput = new bool3();
 
-        if (EquippedChips != null)
-        {
-            for (int i = 0; i < EquippedChips.Length; i++)
-            {
-                if (EquippedChips[i] == null) continue;
+        // if (EquippedChips != null)
+        // {
+        //     for (int i = 0; i < EquippedChips.Length; i++)
+        //     {
+        //         if (EquippedChips[i] == null) continue;
 
-                if (EquippedChips[i] is PassiveChips passiveChip)
-                {
-                    StopCoroutine(passiveChip.PassiveSkillCoroutine);
-                }
-            }
-        }
+        //         if (EquippedChips[i] is PassiveChips passiveChip)
+        //         {
+        //             StopCoroutine(passiveChip.PassiveSkillCoroutine);
+        //         }
+        //     }
+        // }
 
         if (newChips == null) return;
-        EquippedChips = newChips;
+        // EquippedChips = newChips;
 
-        foreach (var chip in EquippedChips)
+        foreach (var chip in newChips)
         {
-            switch (chip)
+            if (chip == null) continue;
+            if (chip is StatChips statChip)
             {
-                case StatChips statChip:
-                    foreach (var statModifier in statChip.StatModifiers)
-                    {
-                        UpdateStat(statModifier.StatData.Name, statModifier.StatData.Value, statModifier.SetType);
-                        if (statModifier.StatData.Name == StatName.MaxHealth)
-                        {
-                            SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.MaxHealth]);
-                        }
-                    }
-                    break;
-                case PassiveChips passiveChip:
-                    passiveChip.PassiveSkillCoroutine = StartCoroutine(passiveChip.CPassiveSkill(this));
-                    break;
+                //     switch (chip)
+                //     {
+                //         case StatChips statChip:
+                foreach (var statModifier in statChip.StatModifiers)
+                {
+                    UpdateStat(statModifier.StatData.Name, statModifier.StatData.Value, statModifier.SetType);
+                }
+                //             break;
+                //         case PassiveChips passiveChip:
+                //             passiveChip.PassiveSkillCoroutine = StartCoroutine(passiveChip.CPassiveSkill(this));
+                //             break;
+                //     }
             }
         }
-        PlayerData.Save();
     }
 
     void UpdateStat(StatName statName, float newValue, StatSetType setType)
     {
-        if (setType == StatSetType.無) return;
-
-        CurrentStatsData[statName] = setType switch
+        switch (setType)
         {
-            StatSetType.加算 => CurrentStatsData[statName] + newValue,
-            StatSetType.乗算 => CurrentStatsData[statName] * newValue,
-            StatSetType.設定 => newValue,
-            _ => CurrentStatsData[statName]
-        };
-    }
-
-    void ActiveSkill()
-    {
-        for (int i = 0; i < EquippedChips.Length; i++)
-        {
-            if (_inputData.SkillInput[i] && EquippedChips[i] is ActiveChips activeChip)
-            {
-                activeChip.UseActiveSkill(this);
-                _inputData.SkillInput[i] = false;
-            }
+            case StatSetType.無:
+                return;
+            case StatSetType.加算:
+                SetCurrentStatsData(statName, CurrentStatsData[statName] + newValue);
+                break;
+            case StatSetType.乗算:
+                SetCurrentStatsData(statName, CurrentStatsData[statName] * newValue);
+                break;
+            case StatSetType.設定:
+                SetCurrentStatsData(statName, newValue);
+                break;
         }
     }
+
+    // void ActiveSkill()
+    // {
+    //     for (int i = 0; i < EquippedChips.Length; i++)
+    //     {
+    //         if (_inputData.SkillInput[i] && EquippedChips[i] is ActiveChips activeChip)
+    //         {
+    //             activeChip.UseActiveSkill(this);
+    //             _inputData.SkillInput[i] = false;
+    //         }
+    //     }
+    // }
 
     public void Damage(float value)
     {
         if (CurrentStatsData[StatName.Invincible] > 0) return;
 
         SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.Health] - value);
-        StartCoroutine(CSetInvincible(0.2f));
+        StartCoroutine(CSetInvincible(1f));
 
         if (CurrentStatsData[StatName.Health] <= 0)
         {

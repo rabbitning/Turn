@@ -12,4 +12,6 @@ public class StatChips : Chips
         public StatSetType SetType;
     }
     public List<StatModifierData> StatModifiers = new();
+
+    public override void Active(PlayerController player) { }
 }

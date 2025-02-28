@@ -19,7 +19,7 @@ public class CMvcamController : EffectByViewChange
     }
     protected override void Start()
     {
-        _cinemachineVirtualCamera.m_Follow = GameManager.Instance.Player.transform;
+        _cinemachineVirtualCamera.m_Follow = PlayerController.Instance.transform;
         base.Start();
     }
 

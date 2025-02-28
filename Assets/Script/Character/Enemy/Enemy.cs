@@ -1,6 +1,7 @@
 using UnityEngine;
 using Pathfinding;
 using TMPro;
+using System.Collections;
 
 public abstract class Enemy : Character, IDamageable
 {
@@ -9,6 +10,7 @@ public abstract class Enemy : Character, IDamageable
     protected SpriteRenderer _spriteRenderer = null;
     public Animator Animator { get; private set; } = null;
     protected Vector2 _currentVelocity = Vector2.zero;
+    bool _canMove = true;
 
     Seeker _seeker = null;
     protected Transform _target = null;
@@ -41,7 +43,7 @@ public abstract class Enemy : Character, IDamageable
     protected void FixedUpdate()
     {
         StateMachine.FixedUpdate();
-        _move?.Invoke();
+        if (_canMove) _move?.Invoke();
     }
 
     // public void Move() => _move?.Invoke();
@@ -74,6 +76,19 @@ public abstract class Enemy : Character, IDamageable
         damagePopup.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1, 1), Random.Range(2, 3)) * 8;
 
         Destroy(damagePopup, .6f);
+    }
+
+    public virtual void Knockback(Vector2 direction, float force)
+    {
+        StartCoroutine(CKnockback(direction, force));
+    }
+
+    IEnumerator CKnockback(Vector2 direction, float force)
+    {
+        _canMove = false;
+        _rb.AddForce(direction * force, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(.1f);
+        _canMove = true;
     }
 
     public void UpdatePath()
