@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4895269303151469787}
   - component: {fileID: 4895269303151469786}
+  - component: {fileID: -2397005636205438267}
   m_Layer: 8
   m_Name: MovePlate
   m_TagString: Untagged
@@ -83,6 +84,24 @@ MonoBehaviour:
   Points:
   - {fileID: 4895269304017858898}
   - {fileID: 4895269302876287915}
+--- !u!114 &-2397005636205438267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895269303151469788}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16e188092e00a243a48ae031d00e2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showInSS: []
+  _showInTD: []
+  _viewChangeSprites:
+  - SpriteRenderer: {fileID: 4895269303578201414}
+    SpriteSS: {fileID: 0}
+    SpriteTD: {fileID: 0}
 --- !u!1 &4895269303578201415
 GameObject:
   m_ObjectHideFlags: 0
