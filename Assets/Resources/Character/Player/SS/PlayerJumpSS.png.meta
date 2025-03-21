@@ -167,27 +167,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: PlayerJumpSS_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b889f72021a31cb498e9503d76ee4787
-      internalID: -1218869161
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -200,7 +179,6 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       PlayerJumpSS_2: -581954239
-      PlayerJumpSS_3: -1218869161
       PlayerJumpSS_1: -846672857
       PlayerJumpSS_0: 1456770071
   spritePackingTag: 
