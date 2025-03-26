@@ -11,8 +11,6 @@ public class MovePlateController : MonoBehaviour
     int _currentPointIndex = 0;
     bool _moveBack = false;
 
-    // Rigidbody2D _plateRb = null;
-
     void Start()
     {
         if (Points.Count > 0)
@@ -23,13 +21,7 @@ public class MovePlateController : MonoBehaviour
         {
             _plate.transform.position = transform.position;
         }
-        // _plateRb = _plate.GetComponent<Rigidbody2D>();
     }
-
-    // void Update()
-    // {
-
-    // }
 
     void FixedUpdate()
     {

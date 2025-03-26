@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EffectByViewChange : MonoBehaviour
 {
+    protected bool IsSS = true;
+
     [Serializable]
     protected struct ViewChangeSprites
     {
@@ -32,6 +34,7 @@ public class EffectByViewChange : MonoBehaviour
 
     protected virtual void ViewChanged(bool isSS)
     {
+        IsSS = isSS;
         foreach (var item in _showInSS) item.SetActive(isSS);
         foreach (var item in _showInTD) item.SetActive(!isSS);
         foreach (var item in _viewChangeSprites) item.SpriteRenderer.sprite = isSS ? item.SpriteSS : item.SpriteTD;

@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 4895269303578201414}
   - component: {fileID: 4895269303578201411}
   - component: {fileID: 8118493096017877507}
+  - component: {fileID: 8148052904066933617}
   m_Layer: 8
   m_Name: plate
   m_TagString: Platform
@@ -213,6 +214,18 @@ MonoBehaviour:
   - SpriteRenderer: {fileID: 4895269303578201414}
     SpriteSS: {fileID: -334008179, guid: 3dd543f4be2c0b34284097899b36ee79, type: 3}
     SpriteTD: {fileID: -482037316, guid: 6a12721401b88c6458e210fa6a681c3c, type: 3}
+--- !u!114 &8148052904066933617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895269303578201415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ed3055204345f489bd0c40c5be5385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4895269304017858899
 GameObject:
   m_ObjectHideFlags: 0
