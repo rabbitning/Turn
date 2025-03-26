@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1707226734}
   - component: {fileID: 1707226735}
   - component: {fileID: 3579037289524861617}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: MeleeAttackSS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 1565070237750590210}
   - component: {fileID: 1638928974084082705}
   - component: {fileID: 2662856104187446003}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: MeleeAttackTD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +533,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 256
     WallCheckOffsetX: {x: 0.3, y: 0.65}
-    WallCheckSizeX: {x: 0.1, y: 0.8}
+    WallCheckSizeX: {x: 0.05, y: 0.8}
     WallCheckOffsetY: {x: 0, y: 0}
     WallCheckSizeY: {x: 0, y: 0}
   _wallCheckDataTD:
@@ -545,9 +545,9 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 256
     WallCheckOffsetX: {x: 0.3, y: 0.25}
-    WallCheckSizeX: {x: 0.1, y: 0.3}
+    WallCheckSizeX: {x: 0.05, y: 0.3}
     WallCheckOffsetY: {x: 0, y: 0.5}
-    WallCheckSizeY: {x: 0.4, y: 0.1}
+    WallCheckSizeY: {x: 0.4, y: 0.05}
   _meleeAttackDataSS:
     ShowGizmos: 0
     Damage: 1

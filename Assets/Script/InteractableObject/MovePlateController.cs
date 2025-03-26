@@ -4,7 +4,7 @@ using UnityEngine;
 public class MovePlateController : MonoBehaviour
 {
     [SerializeField] GameObject _plate = null;
-    Rigidbody2D _plateRb = null;
+    // Rigidbody2D _plateRb = null;
 
     [SerializeField] float _speed = 1f;
     [HideInInspector] public List<Transform> Points = new();
@@ -23,7 +23,7 @@ public class MovePlateController : MonoBehaviour
         {
             _plate.transform.position = transform.position;
         }
-        _plateRb = _plate.GetComponent<Rigidbody2D>();
+        // _plateRb = _plate.GetComponent<Rigidbody2D>();
     }
 
     // void Update()
@@ -35,13 +35,14 @@ public class MovePlateController : MonoBehaviour
     {
         if (Points.Count == 0)
         {
-            _plateRb.velocity = Vector2.zero;
+            // _plateRb.velocity = Vector2.zero;
             return;
         }
 
         var target = Points[_currentPointIndex];
-        var direction = (target.position - _plate.transform.position).normalized;
-        _plateRb.velocity = direction * _speed;
+        // var direction = (target.position - _plate.transform.position).normalized;
+        // _plateRb.velocity = direction * _speed;
+        _plate.transform.position = Vector3.MoveTowards(_plate.transform.position, target.position, _speed * Time.fixedDeltaTime);
 
         if (Vector2.Distance(_plate.transform.position, target.position) < 0.1f)
         {

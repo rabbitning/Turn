@@ -79,10 +79,9 @@ public class PlayerChipManager : MonoBehaviour
     public void ActiveChip(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= EquippedChips.Length) return;
-        Chips chip = EquippedChips[slotIndex];
-        if (chip != null)
+        if (EquippedChips[slotIndex] != null)
         {
-            chip.Active(_player);
+            EquippedChips[slotIndex].Active(_player);
         }
     }
 }

@@ -208,11 +208,13 @@ public class PlayerController : Character, IDamageable
 
     void GroundCheck()
     {
-        _groundCheckDataSS.IsGrounded = Physics2D.OverlapBox(_rb.position + _groundCheckDataSS.GroundCheckOffset, _groundCheckDataSS.GroundCheckSize, 0, _groundCheckDataSS.GroundLayer);
-        _groundCheckDataTD.IsGrounded = Physics2D.OverlapBox(_rb.position + _groundCheckDataTD.GroundCheckOffset, _groundCheckDataTD.GroundCheckSize, 0, _groundCheckDataTD.GroundLayer);
+        Collider2D col = Physics2D.OverlapBox(_rb.position + _groundCheckDataSS.GroundCheckOffset, _groundCheckDataSS.GroundCheckSize, 0, _groundCheckDataSS.GroundLayer);
+        _groundCheckDataSS.IsGrounded = col;
+        if (_groundCheckDataSS.IsGrounded && !col.CompareTag("Platform")) _groundCheckDataSS.LastGroundedPosition = transform.position;
 
-        if (_groundCheckDataSS.IsGrounded) _groundCheckDataSS.LastGroundedPosition = transform.position;
-        if (_groundCheckDataTD.IsGrounded) _groundCheckDataTD.LastGroundedPosition = transform.position;
+        col = Physics2D.OverlapBox(_rb.position + _groundCheckDataTD.GroundCheckOffset, _groundCheckDataTD.GroundCheckSize, 0, _groundCheckDataTD.GroundLayer);
+        _groundCheckDataTD.IsGrounded = col;
+        if (_groundCheckDataTD.IsGrounded && !col.CompareTag("Platform")) _groundCheckDataTD.LastGroundedPosition = transform.position;
     }
 
     void WallCheck()

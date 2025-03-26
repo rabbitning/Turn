@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4895269302876287915}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,9 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4895269303151469787}
   - component: {fileID: 4895269303151469786}
-  - component: {fileID: -2397005636205438267}
-  m_Layer: 8
-  m_Name: MovePlate
+  m_Layer: 7
+  m_Name: MoveWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,24 +83,6 @@ MonoBehaviour:
   Points:
   - {fileID: 4895269304017858898}
   - {fileID: 4895269302876287915}
---- !u!114 &-2397005636205438267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4895269303151469788}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16e188092e00a243a48ae031d00e2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _showInSS: []
-  _showInTD: []
-  _viewChangeSprites:
-  - SpriteRenderer: {fileID: 4895269303578201414}
-    SpriteSS: {fileID: 0}
-    SpriteTD: {fileID: 0}
 --- !u!1 &4895269303578201415
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,11 +93,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4895269303578201413}
   - component: {fileID: 4895269303578201414}
-  - component: {fileID: 4895269303578201412}
   - component: {fileID: 4895269303578201411}
-  m_Layer: 8
+  - component: {fileID: 8118493096017877507}
+  m_Layer: 7
   m_Name: plate
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,41 +155,20 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 180641753
-  m_SortingLayer: 2
-  m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 3dd543f4be2c0b34284097899b36ee79, type: 3}
+  m_SortingLayerID: -1863357681
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 1080197286, guid: 03653030ebbb189459910aab28119bfd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 3, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!50 &4895269303578201412
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4895269303578201415}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_SpriteSortPoint: 1
 --- !u!61 &4895269303578201411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,22 +179,40 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.625}
+    oldSize: {x: 3, y: 4}
+    newSize: {x: 3, y: 4}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 1}
+  m_Size: {x: 2.95, y: 2.95}
   m_EdgeRadius: 0
+--- !u!114 &8118493096017877507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895269303578201415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16e188092e00a243a48ae031d00e2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showInSS: []
+  _showInTD: []
+  _viewChangeSprites:
+  - SpriteRenderer: {fileID: 4895269303578201414}
+    SpriteSS: {fileID: 1080197286, guid: 03653030ebbb189459910aab28119bfd, type: 3}
+    SpriteTD: {fileID: 209837093, guid: 21ab9e0ad9b8f5a41975d6f15c03246f, type: 3}
 --- !u!1 &4895269304017858899
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4895269304017858898}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
