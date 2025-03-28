@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 4895269303578201413}
   - component: {fileID: 4895269303578201414}
   - component: {fileID: 4895269303578201411}
-  - component: {fileID: 8118493096017877507}
   - component: {fileID: 2030059772695678307}
   m_Layer: 7
   m_Name: plate
@@ -196,24 +195,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.95, y: 2.95}
   m_EdgeRadius: 0
---- !u!114 &8118493096017877507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4895269303578201415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16e188092e00a243a48ae031d00e2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _showInSS: []
-  _showInTD: []
-  _viewChangeSprites:
-  - SpriteRenderer: {fileID: 4895269303578201414}
-    SpriteSS: {fileID: 1080197286, guid: 03653030ebbb189459910aab28119bfd, type: 3}
-    SpriteTD: {fileID: 209837093, guid: 21ab9e0ad9b8f5a41975d6f15c03246f, type: 3}
 --- !u!114 &2030059772695678307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ed3055204345f489bd0c40c5be5385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showInSS: []
+  _showInTD: []
+  _viewChangeSprites:
+  - SpriteRenderer: {fileID: 4895269303578201414}
+    SpriteSS: {fileID: 1080197286, guid: 03653030ebbb189459910aab28119bfd, type: 3}
+    SpriteTD: {fileID: 209837093, guid: 21ab9e0ad9b8f5a41975d6f15c03246f, type: 3}
 --- !u!1 &4895269304017858899
 GameObject:
   m_ObjectHideFlags: 0

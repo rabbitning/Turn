@@ -26,13 +26,30 @@ public class DoorController : EffectByViewChange
             _doorDown.transform.Translate(Vector3.down * _openSpeed * Time.deltaTime);
             yield return null;
         }
-        Destroy(_doorUp.GetComponent<Collider2D>());
-        Destroy(_doorDown.GetComponent<Collider2D>());
+        _doorUp.GetComponent<Collider2D>().enabled = false;
+        _doorDown.GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void CloseDoor()
+    {
+        StartCoroutine(CCloseDoor());
+    }
+
+    IEnumerator CCloseDoor()
+    {
+        _doorUp.GetComponent<Collider2D>().enabled = true;
+        _doorDown.GetComponent<Collider2D>().enabled = true;
+        while (_doorUp.transform.position.y > _doorUpStartPos.y)
+        {
+            _doorUp.transform.Translate(Vector3.down * _openSpeed * Time.deltaTime);
+            _doorDown.transform.Translate(Vector3.up * _openSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position - Vector3.up * 1.25f, new Vector2(1, _openSize * 2));
+        Gizmos.DrawWireCube(transform.position, new Vector2(1, _openSize * 2));
     }
 }
