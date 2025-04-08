@@ -401,5 +401,5 @@ MonoBehaviour:
     SpriteTD: {fileID: 2048013469, guid: 117ef08c0a9cdaf4d895569dc1567d3b, type: 3}
   _doorUp: {fileID: 1210150316129082020}
   _doorDown: {fileID: 1210150317277792491}
-  _openSize: 2
-  _openSpeed: 2
+  _openSize: 4
+  _openSpeed: 3
