@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 1210150316129082021}
   - component: {fileID: 1210150316129082022}
   - component: {fileID: 2914330059589198654}
-  - component: {fileID: 7865136410439230506}
   m_Layer: 8
   m_Name: DoorUP
   m_TagString: Untagged
@@ -158,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 180641753
   m_SortingLayer: 2
   m_SortingOrder: -10
-  m_Sprite: {fileID: -264588479, guid: 1996c1349f34f38458b39b9d13ddbf51, type: 3}
+  m_Sprite: {fileID: 157207023, guid: ac5b05562b6616f4a9e9930a071460e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -184,9 +183,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 2}
   m_SpriteTilingProperty:
-    border: {x: 0.1875, y: 0.4375, z: 0.1875, w: 0.625}
+    border: {x: 0, y: 0.5, z: 0, w: 0.25}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 2.5}
+    oldSize: {x: 1, y: 2.125}
     newSize: {x: 1, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
@@ -195,24 +194,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 4}
   m_EdgeRadius: 0
---- !u!114 &7865136410439230506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210150316129082020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16e188092e00a243a48ae031d00e2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _showInSS: []
-  _showInTD: []
-  _viewChangeSprites:
-  - SpriteRenderer: {fileID: 1210150316129082022}
-    SpriteSS: {fileID: -264588479, guid: 1996c1349f34f38458b39b9d13ddbf51, type: 3}
-    SpriteTD: {fileID: -170668680, guid: 117ef08c0a9cdaf4d895569dc1567d3b, type: 3}
 --- !u!1 &1210150317277792491
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +205,6 @@ GameObject:
   - component: {fileID: 1210150317277792404}
   - component: {fileID: 1210150317277792405}
   - component: {fileID: 2850562517587513300}
-  - component: {fileID: 8624001111628688722}
   m_Layer: 8
   m_Name: DoorDown
   m_TagString: Untagged
@@ -288,7 +268,7 @@ SpriteRenderer:
   m_SortingLayerID: 180641753
   m_SortingLayer: 2
   m_SortingOrder: -10
-  m_Sprite: {fileID: -921172779, guid: 1996c1349f34f38458b39b9d13ddbf51, type: 3}
+  m_Sprite: {fileID: -2133953532, guid: ac5b05562b6616f4a9e9930a071460e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -314,9 +294,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2}
   m_SpriteTilingProperty:
-    border: {x: 0.1875, y: 0.625, z: 0.1875, w: 0.4375}
+    border: {x: 0, y: 0.25, z: 0, w: 0.5}
     pivot: {x: 0.5, y: 1}
-    oldSize: {x: 1, y: 2.5}
+    oldSize: {x: 1, y: 2.125}
     newSize: {x: 1, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
@@ -325,24 +305,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 4}
   m_EdgeRadius: 0
---- !u!114 &8624001111628688722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210150317277792491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16e188092e00a243a48ae031d00e2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _showInSS: []
-  _showInTD: []
-  _viewChangeSprites:
-  - SpriteRenderer: {fileID: 1210150317277792405}
-    SpriteSS: {fileID: -921172779, guid: 1996c1349f34f38458b39b9d13ddbf51, type: 3}
-    SpriteTD: {fileID: 2048013469, guid: 117ef08c0a9cdaf4d895569dc1567d3b, type: 3}
 --- !u!1 &1210150318049872315
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,13 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showInSS: []
   _showInTD: []
-  _viewChangeSprites:
-  - SpriteRenderer: {fileID: 1210150316129082022}
-    SpriteSS: {fileID: -264588479, guid: 1996c1349f34f38458b39b9d13ddbf51, type: 3}
-    SpriteTD: {fileID: -170668680, guid: 117ef08c0a9cdaf4d895569dc1567d3b, type: 3}
-  - SpriteRenderer: {fileID: 1210150317277792405}
-    SpriteSS: {fileID: -921172779, guid: 1996c1349f34f38458b39b9d13ddbf51, type: 3}
-    SpriteTD: {fileID: 2048013469, guid: 117ef08c0a9cdaf4d895569dc1567d3b, type: 3}
+  _viewChangeSprites: []
   _doorUp: {fileID: 1210150316129082020}
   _doorDown: {fileID: 1210150317277792491}
   _openSize: 4

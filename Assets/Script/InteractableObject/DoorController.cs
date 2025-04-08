@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DoorController : EffectByViewChange
+public class DoorController : MonoBehaviour
 {
     [SerializeField] GameObject _doorUp;
     [SerializeField] GameObject _doorDown;

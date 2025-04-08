@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -51,7 +51,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -62,8 +62,8 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
-  cookieLightType: 2
+  applyGammaDecoding: 0
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -82,7 +82,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -94,7 +94,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6370ecbd65f9a224aa6e93158c3f3fc8
-      internalID: 892420658
+      spriteID: 5b83a5f098866fc48af6b6d3b7b3807c
+      internalID: 907223499
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf7a919fd3e0df94dbc35d1aa3cf666c
-      internalID: -637351878
+      spriteID: 5cdaa23bdafc29d4eb4c278ae33cc7a4
+      internalID: -934345308
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebe82d27bb32b9f44be6886ce4e8dd02
-      internalID: 608778791
+      spriteID: 0d819f898d470c14299e95eeefe1b014
+      internalID: -519853300
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34b7b05b9a66a9f4d898a9afd28d2cf7
-      internalID: 69690258
+      spriteID: ecc68773f3f6d614fb9d6c07a783a4a3
+      internalID: 2063133304
       vertices: []
       indices: 
       edges: []
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75777bbf8e833b94597b3df29155999e
-      internalID: -1277823341
+      spriteID: f58aae86bd9826044952faea84824264
+      internalID: 2039655684
       vertices: []
       indices: 
       edges: []
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5748f5b328773ee4fbdd5587ab78e930
-      internalID: 1107521522
+      spriteID: 6654f12486af149488a7b97bd1f473a6
+      internalID: -877601965
       vertices: []
       indices: 
       edges: []
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17daa689439348840a844187839271c9
-      internalID: -67746583
+      spriteID: 07ab2fd5b04eca8409de6df5dd365bbb
+      internalID: 139671294
       vertices: []
       indices: 
       edges: []
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0eb2c45ab4060d49aeaaa376fcc6959
-      internalID: 1166458928
+      spriteID: e1f1010ee2e651347a5ca9a1fd53347a
+      internalID: 1815492412
       vertices: []
       indices: 
       edges: []
@@ -275,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4613cd0b29fb1dc45975114c29e46e98
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerWalkTD_2: 608778791
-      PlayerWalkTD_0: 892420658
-      PlayerWalkTD_1: -637351878
-      PlayerWalkTD_5: 1107521522
-      PlayerWalkTD_4: -1277823341
-      PlayerWalkTD_6: -67746583
-      PlayerWalkTD_7: 1166458928
-      PlayerWalkTD_3: 69690258
+      PlayerWalkTD_2: -519853300
+      PlayerWalkTD_0: 907223499
+      PlayerWalkTD_1: -934345308
+      PlayerWalkTD_5: -877601965
+      PlayerWalkTD_4: 2039655684
+      PlayerWalkTD_6: 139671294
+      PlayerWalkTD_7: 1815492412
+      PlayerWalkTD_3: 2063133304
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

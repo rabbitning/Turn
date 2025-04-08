@@ -279,6 +279,7 @@ public class PlayerController : Character, IDamageable
     IEnumerator CResetPlayerPosition(Vector2 newPosition)
     {
         _inputData.CanInput = false;
+        transform.SetParent(null);
         _rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(.2f);
 

@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class LeverController : EffectByViewChange
+public class LeverController : MonoBehaviour
 {
     public UnityEvent OnLeverPulled;
     Animator _animator;
 
-    protected override void Start()
+    void Start()
     {
         _animator = GetComponent<Animator>();
-        base.Start();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,9 +24,9 @@ public class LeverController : EffectByViewChange
         Destroy(gameObject.GetComponent<Collider2D>());
     }
 
-    override protected void ViewChanged(bool isSS)
-    {
-        _animator.SetBool("IsSS", isSS);
-        base.ViewChanged(isSS);
-    }
+    // override protected void ViewChanged(bool isSS)
+    // {
+    //     _animator.SetBool("IsSS", isSS);
+    //     base.ViewChanged(isSS);
+    // }
 }

@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -36,9 +36,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -51,7 +51,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -62,8 +62,8 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
-  cookieLightType: 2
+  applyGammaDecoding: 0
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -82,7 +82,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -94,7 +94,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f5a00733eb8dd4419cf0e3c30c93959
-      internalID: -473783699
+      spriteID: 9aa2b72ceb699d54ebce9ba60ec61acd
+      internalID: -1015567555
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5272195b6ff6cfa40afeb786c79f221d
-      internalID: 1803025651
+      spriteID: 890f0089dccd4994995c8f70b3110ad2
+      internalID: -363173389
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30a3cac0dd71d4d4e820e1c3909361de
-      internalID: -876440955
+      spriteID: 39e8d79e0b8ef244db2b67b9f8094404
+      internalID: 613668577
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cc25d2e1816a9b4ba236a63fcba0d4b
-      internalID: -1571047203
+      spriteID: 4d5cd5965cd40a845a7ebef0e3c538ba
+      internalID: 531379254
       vertices: []
       indices: 
       edges: []
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a947e5bd0dcceb4ba65430572448675
-      internalID: -1350390922
+      spriteID: 863a717ff094d154d9e5bd8483ca5549
+      internalID: 2024865014
       vertices: []
       indices: 
       edges: []
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de641f801bff9be47854271ca7bbb273
-      internalID: 705789737
+      spriteID: 441357afa9e6c8243a5bc5f10febce56
+      internalID: -169203135
       vertices: []
       indices: 
       edges: []
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75ec059ba8d7854458e02bab37cbaae5
-      internalID: -353366853
+      spriteID: bb313a044dc66724180205d61b3d7f17
+      internalID: 1342883559
       vertices: []
       indices: 
       edges: []
@@ -254,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e933b50f6b949f54cab0d36a773c3e3b
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerAttackTDNormal_1: 1803025651
-      PlayerAttackTDNormal_5: 705789737
-      PlayerAttackTDNormal_2: -876440955
-      PlayerAttackTDNormal_0: -473783699
-      PlayerAttackTDNormal_6: -353366853
-      PlayerAttackTDNormal_3: -1571047203
-      PlayerAttackTDNormal_4: -1350390922
+      PlayerAttackTDNormal_1: -363173389
+      PlayerAttackTDNormal_5: -169203135
+      PlayerAttackTDNormal_2: 613668577
+      PlayerAttackTDNormal_0: -1015567555
+      PlayerAttackTDNormal_6: 1342883559
+      PlayerAttackTDNormal_3: 531379254
+      PlayerAttackTDNormal_4: 2024865014
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
