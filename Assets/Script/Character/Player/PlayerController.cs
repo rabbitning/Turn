@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-// using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -276,6 +275,11 @@ public class PlayerController : Character, IDamageable
         _rb.velocity = _movementData.CurrentVelocity;
     }
 
+    public void ResetPlayerPosition()
+    {
+        StartCoroutine(CResetPlayerPosition(_groundCheckDataSS.LastGroundedPosition));
+    }
+
     IEnumerator CResetPlayerPosition(Vector2 newPosition)
     {
         _inputData.CanInput = false;
@@ -284,7 +288,7 @@ public class PlayerController : Character, IDamageable
         yield return new WaitForSeconds(.2f);
 
         transform.position = newPosition;
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.5f);
 
         _inputData.CanInput = true;
     }

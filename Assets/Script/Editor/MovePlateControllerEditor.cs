@@ -9,6 +9,10 @@ public class MovePlateControllerEditor : Editor
         DrawDefaultInspector();
 
         MovePlateController controller = (MovePlateController)target;
+        
+        GUILayout.Space(10);
+
+        EditorGUILayout.LabelField("當前節點數量", controller.Points.Count.ToString());
 
         if (GUILayout.Button("新增節點"))
         {
@@ -23,9 +27,13 @@ public class MovePlateControllerEditor : Editor
             newPoint.transform.parent = controller.transform;
             newPoint.layer = controller.gameObject.layer;
 
+            newPoint.SetActive(false); // 隱藏新節點物件
+
             // 標記場景已更改
             EditorUtility.SetDirty(controller);
         }
+
+        GUILayout.Space(10);
 
         if (GUILayout.Button("刪除節點"))
         {
@@ -43,6 +51,23 @@ public class MovePlateControllerEditor : Editor
                 // 標記場景已更改
                 EditorUtility.SetDirty(controller);
             }
+        }
+
+        GUILayout.Space(50);
+
+        if (GUILayout.Button("重置節點"))
+        {
+            // 遍歷並刪除所有節點
+            foreach (Transform point in controller.Points)
+            {
+                DestroyImmediate(point.gameObject);
+            }
+
+            // 清空節點列表
+            controller.Points.Clear();
+
+            // 標記場景已更改
+            EditorUtility.SetDirty(controller);
         }
     }
 }

@@ -3,12 +3,14 @@ using UnityEngine;
 public class DamageObject : MonoBehaviour
 {
     [SerializeField] float _damage = 1f;
+    [SerializeField] bool _isResetPos = false;
 
     void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.TryGetComponent<PlayerController>(out var player))
         {
-                player.Damage(_damage);
+            player.Damage(_damage);
+            if (_isResetPos) player.ResetPlayerPosition();
         }
     }
 
@@ -17,6 +19,7 @@ public class DamageObject : MonoBehaviour
         if (other.gameObject.TryGetComponent<PlayerController>(out var player))
         {
             player.Damage(_damage);
+            if (_isResetPos) player.ResetPlayerPosition();
         }
     }
 }
