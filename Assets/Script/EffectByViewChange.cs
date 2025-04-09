@@ -38,5 +38,12 @@ public class EffectByViewChange : MonoBehaviour
         foreach (var item in _showInSS) item.SetActive(isSS);
         foreach (var item in _showInTD) item.SetActive(!isSS);
         foreach (var item in _viewChangeSprites) item.SpriteRenderer.sprite = isSS ? item.SpriteSS : item.SpriteTD;
+
+        if (isSS) OnSS();
+        else OnTD();
     }
+
+    protected virtual void OnSS() { }
+
+    protected virtual void OnTD() { }
 }
