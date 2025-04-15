@@ -16,7 +16,7 @@ public class EffectByViewChange : MonoBehaviour
 
     [SerializeField] List<GameObject> _showInSS;
     [SerializeField] List<GameObject> _showInTD;
-    [SerializeField] protected List<ViewChangeSprites> _viewChangeSprites;
+    [SerializeField] List<ViewChangeSprites> _viewChangeSprites;
 
     protected virtual void Start()
     {

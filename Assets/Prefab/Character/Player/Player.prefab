@@ -384,7 +384,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.65}
+  m_Offset: {x: 0, y: 0.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -395,7 +395,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 1.3}
+  m_Size: {x: 0.5, y: 1.2}
   m_EdgeRadius: 0
 --- !u!114 &2799664363001944502
 MonoBehaviour:
@@ -494,11 +494,11 @@ MonoBehaviour:
     Value: 0
   _colliderDataSS:
     ShowGizmos: 0
-    Size: {x: 0.6, y: 1.3}
-    Offset: {x: 0, y: 0.65}
+    Size: {x: 0.5, y: 1.2}
+    Offset: {x: 0, y: 0.6}
   _colliderDataTD:
     ShowGizmos: 0
-    Size: {x: 0.6, y: 0.5}
+    Size: {x: 0.5, y: 0.5}
     Offset: {x: 0, y: 0.25}
   _movementData:
     CurrentVelocity: {x: 0, y: 0}
@@ -512,7 +512,7 @@ MonoBehaviour:
     IsGrounded: 1
     GroundLayer:
       serializedVersion: 2
-      m_Bits: 256
+      m_Bits: 768
     GroundCheckOffset: {x: 0, y: 0}
     GroundCheckSize: {x: 0.5, y: 0.1}
     LastGroundedPosition: {x: 26.390003, y: -0.99255013}
