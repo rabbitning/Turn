@@ -231,7 +231,7 @@ public class PlayerController : Character, IDamageable
         if (transform.position.y < -20 && CurrentStatsData[StatName.Invincible] == 0)
         {
             Damage(10);
-            if (CurrentStatsData[StatName.Health] > 0) StartCoroutine(CResetPlayerPosition(_groundCheckDataSS.LastGroundedPosition));
+            if (CurrentStatsData[StatName.Health] > 0) ResetPlayerPosition();
         }
 
         _movementData.JumpBufferTimer = _inputData.JumpInput.x ? _movementData.JumpBufferTime : _movementData.JumpBufferTimer - Time.fixedDeltaTime;
@@ -264,7 +264,7 @@ public class PlayerController : Character, IDamageable
         if (!_groundCheckDataTD.IsGrounded && CurrentStatsData[StatName.Invincible] == 0)
         {
             Damage(10);
-            if (CurrentStatsData[StatName.Health] > 0) StartCoroutine(CResetPlayerPosition(_groundCheckDataTD.LastGroundedPosition));
+            if (CurrentStatsData[StatName.Health] > 0) ResetPlayerPosition();
         }
 
         _movementData.CurrentVelocity = Vector2.MoveTowards(_movementData.CurrentVelocity, _inputData.MoveInput.normalized * CurrentStatsData[StatName.MaxMoveSpeed], CurrentStatsData[StatName.GroundAcceleration] * Time.fixedDeltaTime);
@@ -277,7 +277,7 @@ public class PlayerController : Character, IDamageable
 
     public void ResetPlayerPosition()
     {
-        StartCoroutine(CResetPlayerPosition(_groundCheckDataSS.LastGroundedPosition));
+        StartCoroutine(CResetPlayerPosition(IsSS ? _groundCheckDataSS.LastGroundedPosition : _groundCheckDataTD.LastGroundedPosition));
     }
 
     IEnumerator CResetPlayerPosition(Vector2 newPosition)
