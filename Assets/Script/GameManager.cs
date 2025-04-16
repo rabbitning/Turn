@@ -25,7 +25,7 @@ public class GameManager : EffectByViewChange
         OnViewChanged?.Invoke(_isSideScroll);
     }
     [SerializeField] float _viewChangeDelay = 0;
-    public float ViewChangeCooldown = 0;
+    [Min(0.0001f)] public float ViewChangeCooldown = 0;
     float _viewChangeCooldownTimer = 0;
 
     [Space(10)]

@@ -52,7 +52,7 @@ MonoBehaviour:
       m_Calls: []
   _isSideScroll: 1
   _viewChangeDelay: 0
-  ViewChangeCooldown: 0.2
+  ViewChangeCooldown: 0.4
   _viewChangedShakeIntensity: 0
   _viewChangedShakeDuration: 0.5
   _gravity: {x: 0, y: -70}
