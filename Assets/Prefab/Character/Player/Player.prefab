@@ -514,7 +514,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 768
     GroundCheckOffset: {x: 0, y: 0}
-    GroundCheckSize: {x: 0.5, y: 0.1}
+    GroundCheckSize: {x: 0.4, y: 0.1}
     LastGroundedPosition: {x: 26.390003, y: -0.99255013}
   _groundCheckDataTD:
     ShowGizmos: 0
@@ -523,7 +523,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 128
     GroundCheckOffset: {x: 0, y: 0.25}
-    GroundCheckSize: {x: 0.5, y: 0.4}
+    GroundCheckSize: {x: 0.4, y: 0.4}
     LastGroundedPosition: {x: 26.390003, y: -0.99255013}
   _wallCheckDataSS:
     ShowGizmos: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
     WallLayer:
       serializedVersion: 2
       m_Bits: 256
-    WallCheckOffsetX: {x: 0.3, y: 0.65}
+    WallCheckOffsetX: {x: 0.25, y: 0.6}
     WallCheckSizeX: {x: 0.05, y: 0.8}
     WallCheckOffsetY: {x: 0, y: 0}
     WallCheckSizeY: {x: 0, y: 0}
@@ -545,10 +545,10 @@ MonoBehaviour:
     WallLayer:
       serializedVersion: 2
       m_Bits: 256
-    WallCheckOffsetX: {x: 0.3, y: 0.25}
+    WallCheckOffsetX: {x: 0.25, y: 0.25}
     WallCheckSizeX: {x: 0.05, y: 0.3}
     WallCheckOffsetY: {x: 0, y: 0.5}
-    WallCheckSizeY: {x: 0.4, y: 0.05}
+    WallCheckSizeY: {x: 0.3, y: 0.05}
   _meleeAttackDataSS:
     ShowGizmos: 0
     Damage: 1
