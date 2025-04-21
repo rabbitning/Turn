@@ -18,20 +18,20 @@ public abstract class Character : EffectByViewChange
 
         switch (statName)
         {
-            case StatName.MaxHealth:
-                CurrentStatsData[StatName.MaxHealth] = value;
-                SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.Health]);
-                break;
+            // case StatName.MaxHealth:
+            //     CurrentStatsData[StatName.MaxHealth] = value;
+            //     SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.Health]);
+            //     break;
             case StatName.Health:
                 CurrentStatsData[StatName.Health] = Mathf.Min(value, CurrentStatsData[StatName.MaxHealth]);
                 break;
-            case StatName.MaxShield:
-                CurrentStatsData[StatName.MaxShield] = value;
-                SetCurrentStatsData(StatName.Shield, CurrentStatsData[StatName.Shield]);
-                break;
-            case StatName.Shield:
-                CurrentStatsData[StatName.Shield] = Mathf.Min(value, CurrentStatsData[StatName.MaxShield]);
-                break;
+            // case StatName.MaxShield:
+            //     CurrentStatsData[StatName.MaxShield] = value;
+            //     SetCurrentStatsData(StatName.Shield, CurrentStatsData[StatName.Shield]);
+            //     break;
+            // case StatName.Shield:
+            //     CurrentStatsData[StatName.Shield] = Mathf.Min(value, CurrentStatsData[StatName.MaxShield]);
+            //     break;
             case StatName.Invincible:
                 CurrentStatsData[StatName.Invincible] = value == 0 ? 0 : 1;
                 break;
