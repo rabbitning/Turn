@@ -304,6 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1964052983}
   - component: {fileID: 1964052982}
+  - component: {fileID: 1964052984}
   m_Layer: 12
   m_Name: Boss
   m_TagString: Untagged
@@ -371,13 +372,39 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964052981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 19.5, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964052984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964052981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c776e5f97bc7e2147b76fe5a94d94758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showInSS: []
+  _showInTD: []
+  _viewChangeSprites: []
+  DefaultStatsData:
+  - Name: 0
+    Value: 100
+  - Name: 1
+    Value: 100
+  currentPhase: 0
+  bulletPrefab: {fileID: 3375040775798636895, guid: 4a75f9a1369eafb47bc8cb6519de91e1, type: 3}
+  lightningPrefab: {fileID: 3375040775798636895, guid: 4a75f9a1369eafb47bc8cb6519de91e1, type: 3}
+  warningPrefab: {fileID: 3375040775798636895, guid: 4a75f9a1369eafb47bc8cb6519de91e1, type: 3}
+  blockPrefab: {fileID: 3375040775798636895, guid: 4a75f9a1369eafb47bc8cb6519de91e1, type: 3}
+  laserPrefab: {fileID: 3375040775798636895, guid: 4a75f9a1369eafb47bc8cb6519de91e1, type: 3}
 --- !u!1839735485 &1444219346094402645
 Tilemap:
   m_ObjectHideFlags: 0
