@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 2375475376181909457}
   - component: {fileID: 1908566803014822506}
   - component: {fileID: 2932840706517581261}
+  - component: {fileID: 2222630608059337289}
   m_Layer: 0
   m_Name: GroundSpike
   m_TagString: Untagged
@@ -572,6 +573,20 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0
+--- !u!114 &2222630608059337289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828392293292413685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f98f322e66e50459c0d97aaadf3a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _isResetPos: 1
 --- !u!1 &8986475816604481217
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +919,7 @@ GameObject:
   - component: {fileID: 8986475817160114910}
   - component: {fileID: 8986475817160114911}
   - component: {fileID: 8986475817160114908}
+  - component: {fileID: 8150074510620472748}
   m_Layer: 0
   m_Name: WallSpike
   m_TagString: Untagged
@@ -1102,6 +1118,20 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0
+--- !u!114 &8150074510620472748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8986475817160114882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f98f322e66e50459c0d97aaadf3a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _isResetPos: 1
 --- !u!1 &8986475817965122988
 GameObject:
   m_ObjectHideFlags: 0

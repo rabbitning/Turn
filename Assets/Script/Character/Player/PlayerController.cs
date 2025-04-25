@@ -33,7 +33,7 @@ public class PlayerController : Character, IDamageable
     #region Actions
 
     // Action _move = null;
-    Action _attack = null;
+    // Action _attack = null;
     // Action _updateAnimationState = null;
 
     #endregion
@@ -44,7 +44,7 @@ public class PlayerController : Character, IDamageable
     BoxCollider2D _col = null;
     Animator _animator = null;
     SpriteRenderer _playerSpriteRenderer = null;
-    PlayerChipManager _chipManager = null;
+    // PlayerChipManager _chipManager = null;
 
     #endregion
 
@@ -69,17 +69,18 @@ public class PlayerController : Character, IDamageable
     void Update()
     {
         HandleInput();
-        _attack?.Invoke();
+        // _attack?.Invoke();
+        HandleAttack();
         _updateAnimationState?.Invoke();
         // ActiveSkill();
         CheckInvincible();
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         GroundCheck();
         WallCheck();
-        _move?.Invoke();
+        base.FixedUpdate();
     }
 
     protected override void ViewChanged(bool isSS)
@@ -87,22 +88,20 @@ public class PlayerController : Character, IDamageable
         base.ViewChanged(isSS);
         _rb.velocity = _movementData.CurrentVelocity = Vector2.zero;
         ResetInput();
-        if (isSS)
-        {
-            _col.size = _colliderDataSS.Size;
-            _col.offset = _colliderDataSS.Offset;
-            _move = MoveInSS;
-            _attack = HandleAttackSS;
-            _updateAnimationState = UpdateAnimationStateSS;
-        }
-        else
-        {
-            _col.size = _colliderDataTD.Size;
-            _col.offset = _colliderDataTD.Offset;
-            _move = MoveInTD;
-            _attack = HandleAttackTD;
-            _updateAnimationState = UpdateAnimationStateTD;
-        }
+    }
+
+    protected override void OnSS()
+    {
+        base.OnSS();
+        _col.size = _colliderDataSS.Size;
+        _col.offset = _colliderDataSS.Offset;
+    }
+
+    protected override void OnTD()
+    {
+        base.OnTD();
+        _col.size = _colliderDataTD.Size;
+        _col.offset = _colliderDataTD.Offset;
     }
 
     // public void Respawn()
@@ -133,12 +132,9 @@ public class PlayerController : Character, IDamageable
 
         _inputData.MousePosInput = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetKey(KeyCode.E)) _chipManager.ActiveChip(0);
-        // _inputData.SkillInput[0] = true;
-        if (Input.GetKey(KeyCode.Q)) _chipManager.ActiveChip(1);
-        // _inputData.SkillInput[1] = true;
-        if (Input.GetKey(KeyCode.C)) _chipManager.ActiveChip(2);
-        // _inputData.SkillInput[2] = true;
+        // if (Input.GetKey(KeyCode.E)) _chipManager.ActiveChip(0);
+        // if (Input.GetKey(KeyCode.Q)) _chipManager.ActiveChip(1);
+        // if (Input.GetKey(KeyCode.C)) _chipManager.ActiveChip(2);
     }
 
     void ResetInput()
@@ -149,7 +145,8 @@ public class PlayerController : Character, IDamageable
         _inputData.SkillInput = new bool3();
     }
 
-    void HandleAttackSS()
+    // void HandleAttackSS()
+    void HandleAttack()
     {
         _rangedAttackDataSS.AttackCooldownTimer -= Time.deltaTime;
         _meleeAttackDataSS.AttackCooldownTimer -= Time.deltaTime;
@@ -177,33 +174,33 @@ public class PlayerController : Character, IDamageable
         }
     }
 
-    void HandleAttackTD()
-    {
-        _rangedAttackDataSS.AttackCooldownTimer -= Time.deltaTime;
-        _meleeAttackDataSS.AttackCooldownTimer -= Time.deltaTime;
+    // void HandleAttackTD()
+    // {
+    //     _rangedAttackDataSS.AttackCooldownTimer -= Time.deltaTime;
+    //     _meleeAttackDataSS.AttackCooldownTimer -= Time.deltaTime;
 
-        if (_inputData.AttackInput.y && _rangedAttackDataSS.AttackCooldownTimer <= 0)
-        {
-            _animator.SetTrigger("RangedAttack");
+    //     if (_inputData.AttackInput.y && _rangedAttackDataSS.AttackCooldownTimer <= 0)
+    //     {
+    //         _animator.SetTrigger("RangedAttack");
 
-            Vector2 offset = new(_rangedAttackDataSS.ProjectileOffset.x * Mathf.Sign(_inputData.MousePosInput.x - transform.position.x), _rangedAttackDataSS.ProjectileOffset.y);
-            Vector2 direction = (_inputData.MousePosInput - (_rb.position + offset)).normalized;
+    //         Vector2 offset = new(_rangedAttackDataSS.ProjectileOffset.x * Mathf.Sign(_inputData.MousePosInput.x - transform.position.x), _rangedAttackDataSS.ProjectileOffset.y);
+    //         Vector2 direction = (_inputData.MousePosInput - (_rb.position + offset)).normalized;
 
-            GameObject projectile = Instantiate(_rangedAttackDataSS.Projectile, _rb.position + offset, quaternion.identity);
+    //         GameObject projectile = Instantiate(_rangedAttackDataSS.Projectile, _rb.position + offset, quaternion.identity);
 
-            projectile.GetComponent<BulletController>().Damage = CurrentStatsData[StatName.RangedAttackDamage];
-            projectile.GetComponent<Rigidbody2D>().velocity = direction * _rangedAttackDataSS.ProjectileSpeed;
+    //         projectile.GetComponent<BulletController>().Damage = CurrentStatsData[StatName.RangedAttackDamage];
+    //         projectile.GetComponent<Rigidbody2D>().velocity = direction * _rangedAttackDataSS.ProjectileSpeed;
 
-            _rangedAttackDataSS.AttackCooldownTimer = CurrentStatsData[StatName.AttackCooldown];
-        }
+    //         _rangedAttackDataSS.AttackCooldownTimer = CurrentStatsData[StatName.AttackCooldown];
+    //     }
 
-        if (!_inputData.AttackInput.y && _inputData.AttackInput.x && _meleeAttackDataSS.AttackCooldownTimer <= 0)
-        {
-            _animator.SetTrigger("MeleeAttack");
+    //     if (!_inputData.AttackInput.y && _inputData.AttackInput.x && _meleeAttackDataSS.AttackCooldownTimer <= 0)
+    //     {
+    //         _animator.SetTrigger("MeleeAttack");
 
-            _meleeAttackDataSS.AttackCooldownTimer = CurrentStatsData[StatName.AttackCooldown];
-        }
-    }
+    //         _meleeAttackDataSS.AttackCooldownTimer = CurrentStatsData[StatName.AttackCooldown];
+    //     }
+    // }
 
     void GroundCheck()
     {
@@ -293,78 +290,78 @@ public class PlayerController : Character, IDamageable
         _inputData.CanInput = true;
     }
 
-    public void UpdateChips(Chips[] newChips)
-    {
+    // public void UpdateChips(Chips[] newChips)
+    // {
 
 
-        foreach (var stat in DefaultStatsData)
-        {
-            //     switch (stat.Name)
-            //     {
-            //         // case StatName.Health:
-            //         // case StatName.Shield:
-            //         //     break;
-            //         default:
-            SetCurrentStatsData(stat.Name, stat.Value);
-            //             break;
-            //     }
-        }
-        // _inputData.SkillInput = new bool3();
+    //     foreach (var stat in DefaultStatsData)
+    //     {
+    //         //     switch (stat.Name)
+    //         //     {
+    //         //         // case StatName.Health:
+    //         //         // case StatName.Shield:
+    //         //         //     break;
+    //         //         default:
+    //         SetCurrentStatsData(stat.Name, stat.Value);
+    //         //             break;
+    //         //     }
+    //     }
+    //     // _inputData.SkillInput = new bool3();
 
-        // if (EquippedChips != null)
-        // {
-        //     for (int i = 0; i < EquippedChips.Length; i++)
-        //     {
-        //         if (EquippedChips[i] == null) continue;
+    //     // if (EquippedChips != null)
+    //     // {
+    //     //     for (int i = 0; i < EquippedChips.Length; i++)
+    //     //     {
+    //     //         if (EquippedChips[i] == null) continue;
 
-        //         if (EquippedChips[i] is PassiveChips passiveChip)
-        //         {
-        //             StopCoroutine(passiveChip.PassiveSkillCoroutine);
-        //         }
-        //     }
-        // }
+    //     //         if (EquippedChips[i] is PassiveChips passiveChip)
+    //     //         {
+    //     //             StopCoroutine(passiveChip.PassiveSkillCoroutine);
+    //     //         }
+    //     //     }
+    //     // }
 
-        if (newChips == null) return;
-        // EquippedChips = newChips;
+    //     if (newChips == null) return;
+    //     // EquippedChips = newChips;
 
-        foreach (var chip in newChips)
-        {
-            if (chip == null) continue;
-            if (chip is StatChips statChip)
-            {
-                //     switch (chip)
-                //     {
-                //         case StatChips statChip:
-                foreach (var statModifier in statChip.StatModifiers)
-                {
-                    UpdateStat(statModifier.StatData.Name, statModifier.StatData.Value, statModifier.SetType);
-                }
-                //             break;
-                //         case PassiveChips passiveChip:
-                //             passiveChip.PassiveSkillCoroutine = StartCoroutine(passiveChip.CPassiveSkill(this));
-                //             break;
-                //     }
-            }
-        }
-    }
+    //     foreach (var chip in newChips)
+    //     {
+    //         if (chip == null) continue;
+    //         if (chip is StatChips statChip)
+    //         {
+    //             //     switch (chip)
+    //             //     {
+    //             //         case StatChips statChip:
+    //             foreach (var statModifier in statChip.StatModifiers)
+    //             {
+    //                 UpdateStat(statModifier.StatData.Name, statModifier.StatData.Value, statModifier.SetType);
+    //             }
+    //             //             break;
+    //             //         case PassiveChips passiveChip:
+    //             //             passiveChip.PassiveSkillCoroutine = StartCoroutine(passiveChip.CPassiveSkill(this));
+    //             //             break;
+    //             //     }
+    //         }
+    //     }
+    // }
 
-    void UpdateStat(StatName statName, float newValue, StatSetType setType)
-    {
-        switch (setType)
-        {
-            case StatSetType.無:
-                return;
-            case StatSetType.加算:
-                SetCurrentStatsData(statName, CurrentStatsData[statName] + newValue);
-                break;
-            case StatSetType.乗算:
-                SetCurrentStatsData(statName, CurrentStatsData[statName] * newValue);
-                break;
-            case StatSetType.設定:
-                SetCurrentStatsData(statName, newValue);
-                break;
-        }
-    }
+    // void UpdateStat(StatName statName, float newValue, StatSetType setType)
+    // {
+    //     switch (setType)
+    //     {
+    //         case StatSetType.無:
+    //             return;
+    //         case StatSetType.加算:
+    //             SetCurrentStatsData(statName, CurrentStatsData[statName] + newValue);
+    //             break;
+    //         case StatSetType.乗算:
+    //             SetCurrentStatsData(statName, CurrentStatsData[statName] * newValue);
+    //             break;
+    //         case StatSetType.設定:
+    //             SetCurrentStatsData(statName, newValue);
+    //             break;
+    //     }
+    // }
 
     // void ActiveSkill()
     // {

@@ -177,8 +177,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2799664362959370343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
-  m_LocalScale: {x: 1.1, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2799664363001944500}
@@ -226,7 +226,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: -10
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.47058824}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -463,7 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showInSS: []
-  _showInTD: []
+  _showInTD:
+  - {fileID: 2799664362959370343}
   _viewChangeSprites: []
   DefaultStatsData:
   - Name: 0
@@ -514,16 +515,16 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 768
     GroundCheckOffset: {x: 0, y: 0}
-    GroundCheckSize: {x: 0.5, y: 0.1}
+    GroundCheckSize: {x: 0.4, y: 0.1}
     LastGroundedPosition: {x: 26.390003, y: -0.99255013}
   _groundCheckDataTD:
     ShowGizmos: 0
     IsGrounded: 1
     GroundLayer:
       serializedVersion: 2
-      m_Bits: 128
+      m_Bits: 640
     GroundCheckOffset: {x: 0, y: 0.25}
-    GroundCheckSize: {x: 0.5, y: 0.4}
+    GroundCheckSize: {x: 0.4, y: 0.4}
     LastGroundedPosition: {x: 26.390003, y: -0.99255013}
   _wallCheckDataSS:
     ShowGizmos: 0
@@ -533,7 +534,7 @@ MonoBehaviour:
     WallLayer:
       serializedVersion: 2
       m_Bits: 256
-    WallCheckOffsetX: {x: 0.3, y: 0.65}
+    WallCheckOffsetX: {x: 0.25, y: 0.6}
     WallCheckSizeX: {x: 0.05, y: 0.8}
     WallCheckOffsetY: {x: 0, y: 0}
     WallCheckSizeY: {x: 0, y: 0}
@@ -545,10 +546,10 @@ MonoBehaviour:
     WallLayer:
       serializedVersion: 2
       m_Bits: 256
-    WallCheckOffsetX: {x: 0.3, y: 0.25}
+    WallCheckOffsetX: {x: 0.25, y: 0.25}
     WallCheckSizeX: {x: 0.05, y: 0.3}
     WallCheckOffsetY: {x: 0, y: 0.5}
-    WallCheckSizeY: {x: 0.4, y: 0.05}
+    WallCheckSizeY: {x: 0.3, y: 0.05}
   _meleeAttackDataSS:
     ShowGizmos: 0
     Damage: 1
@@ -569,16 +570,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2799664363001944501}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f458c7f113dfd6d40808c910b0089e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvailableChips: []
-  EquippedChips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &1351606118949832344
 MonoBehaviour:
   m_ObjectHideFlags: 0

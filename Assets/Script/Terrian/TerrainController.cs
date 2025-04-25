@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -23,11 +24,11 @@ public class TerrainController : EffectByViewChange
         foreach (RuleTileData ruleTileData in _ruleTileData)
         {
             if (ruleTileData.IsNull) continue;
-            StartCoroutine(ShiftTiles(ruleTileData));
+            StartCoroutine(ChangeTiles(ruleTileData));
         }
     }
 
-    IEnumerator ShiftTiles(RuleTileData ruleTileData)
+    IEnumerator ChangeTiles(RuleTileData ruleTileData)
     {
         Vector3Int playerPosition = Vector3Int.FloorToInt(PlayerController.Instance.transform.position);
         float elapsedTime = 0f;
@@ -43,8 +44,35 @@ public class TerrainController : EffectByViewChange
             yield return null;
         }
 
-        if (IsSS) ruleTileData.Tilemap.SwapTile(ruleTileData.RuleTD, ruleTileData.RuleSS);
-        else ruleTileData.Tilemap.SwapTile(ruleTileData.RuleSS, ruleTileData.RuleTD);
+        BoundsInt tilemapBounds = ruleTileData.Tilemap.cellBounds;
+        TileBase[] allTilesInBounds = ruleTileData.Tilemap.GetTilesBlock(tilemapBounds);
+
+        List<Vector3Int> tilePositions = new();
+        List<TileBase> tilesToReplace = new();
+
+        for (int x = 0; x < tilemapBounds.size.x; x++)
+        {
+            for (int y = 0; y < tilemapBounds.size.y; y++)
+            {
+                Vector3Int currentPosition = new(tilemapBounds.xMin + x, tilemapBounds.yMin + y, 0);
+                TileBase currentTile = allTilesInBounds[x + y * tilemapBounds.size.x];
+                if (currentTile == null || IsSS && currentTile == ruleTileData.RuleSS || !IsSS && currentTile == ruleTileData.RuleTD) continue;
+
+                tilePositions.Add(currentPosition);
+                tilesToReplace.Add(IsSS ? ruleTileData.RuleSS : ruleTileData.RuleTD);
+
+                if (tilePositions.Count >= 700)
+                {
+                    ruleTileData.Tilemap.SetTiles(tilePositions.ToArray(), tilesToReplace.ToArray());
+                    tilePositions.Clear();
+                    tilesToReplace.Clear();
+                    yield return null;
+                }
+            }
+        }
+
+        if (tilePositions.Count > 0) ruleTileData.Tilemap.SetTiles(tilePositions.ToArray(), tilesToReplace.ToArray());
+        ruleTileData.Tilemap.CompressBounds();
     }
 
     void SwitchTilesInRadius(RuleTileData ruleTileData, Vector3Int center, float radius)
@@ -60,8 +88,7 @@ public class TerrainController : EffectByViewChange
                     TileBase tile = ruleTileData.Tilemap.GetTile(tilePosition);
                     if (tile == null || IsSS && tile == ruleTileData.RuleSS || !IsSS && tile == ruleTileData.RuleTD) continue;
 
-                    if (IsSS) ruleTileData.Tilemap.SetTile(tilePosition, ruleTileData.RuleSS);
-                    else ruleTileData.Tilemap.SetTile(tilePosition, ruleTileData.RuleTD);
+                    ruleTileData.Tilemap.SetTile(tilePosition, IsSS ? ruleTileData.RuleSS : ruleTileData.RuleTD);
                 }
             }
         }

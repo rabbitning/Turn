@@ -46,4 +46,10 @@ public class EffectByViewChange : MonoBehaviour
     protected virtual void OnSS() { }
 
     protected virtual void OnTD() { }
+
+    public void AddViewChangeSprites(SpriteRenderer spriteRenderer, Sprite spriteSS, Sprite spriteTD)
+    {
+        ViewChangeSprites viewChangeSprites = new() { SpriteRenderer = spriteRenderer, SpriteSS = spriteSS, SpriteTD = spriteTD };
+        _viewChangeSprites.Add(viewChangeSprites);
+    }
 }

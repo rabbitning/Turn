@@ -1416,11 +1416,11 @@ RectTransform:
   m_Father: {fileID: 8276562203180297273}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -110}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 10, y: 10}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &8276562203612290628
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2032,14 +2032,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8276562203775623760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec379b2acca3f8047b2d73f5a318a346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chipButtonPrefab: {fileID: 1932519761563899093, guid: c85716b195862ca408f7104624a02a70, type: 3}
-  _equippedChipsPanel: {fileID: 8276562203507169092}
-  _availableChipsPanel: {fileID: 8276562204967507242}
 --- !u!1 &8276562203819137113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,7 +2667,7 @@ MonoBehaviour:
   m_Intensity: 1.1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000000f6bef90d95fc40af31205c08f4b3c8a
+  m_ApplyToSortingLayers: 000000000f6bef90d95fc40af31205c08f4b3c8a977bf6d4
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -3983,11 +3980,11 @@ RectTransform:
   m_Father: {fileID: 8276562204834179976}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 330, y: -30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 220, y: -890}
   m_SizeDelta: {x: 2153, y: 596.0698}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &8276562204832048092
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4300,11 +4297,11 @@ RectTransform:
   m_Father: {fileID: 8276562204834179976}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 240, y: -100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 220, y: -950}
   m_SizeDelta: {x: 881, y: 348}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &8276562204960161017
 CanvasRenderer:
   m_ObjectHideFlags: 0
