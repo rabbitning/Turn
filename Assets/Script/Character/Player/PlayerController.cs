@@ -76,11 +76,11 @@ public class PlayerController : Character, IDamageable
         CheckInvincible();
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         GroundCheck();
         WallCheck();
-        _move?.Invoke();
+        base.FixedUpdate();
     }
 
     protected override void ViewChanged(bool isSS)
@@ -92,20 +92,16 @@ public class PlayerController : Character, IDamageable
 
     protected override void OnSS()
     {
+        base.OnSS();
         _col.size = _colliderDataSS.Size;
         _col.offset = _colliderDataSS.Offset;
-        _move = MoveInSS;
-        // _attack = HandleAttackSS;
-        _updateAnimationState = UpdateAnimationStateSS;
     }
 
     protected override void OnTD()
     {
+        base.OnTD();
         _col.size = _colliderDataTD.Size;
         _col.offset = _colliderDataTD.Offset;
-        _move = MoveInTD;
-        // _attack = HandleAttackTD;
-        _updateAnimationState = UpdateAnimationStateTD;
     }
 
     // public void Respawn()

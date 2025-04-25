@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class FragileTileController : MonoBehaviour
+public class FragileTileController : EffectByViewChange
 {
     [SerializeField] float _breakDelay = 0.5f;
     [SerializeField] float _breakDuration = 0.5f;
@@ -27,18 +27,56 @@ public class FragileTileController : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            StartCoroutine(BreakTile());
+        }
+    }
+
+    protected override void OnSS()
+    {
+        base.OnSS();
+        if (_col.isTrigger) _col.enabled = false;
+    }
+
+    protected override void OnTD()
+    {
+        base.OnTD();
+        if (_col.isTrigger) _col.enabled = true;
+    }
+
     IEnumerator BreakTile()
     {
         if (_isBreaking) yield break;
         _isBreaking = true;
 
-        yield return new WaitForSeconds(_breakDelay);
+        Vector3 originalPosition = transform.position;
+        float shakeDuration = _breakDelay;
+        float shakeMagnitude = 0.05f;
+        float elapsed = 0f;
+        float shakeInterval = 0.05f; // Adjust this value to control the frequency of the shake
+
+        while (elapsed < shakeDuration)
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed % shakeInterval < Time.deltaTime)
+            {
+                float offsetX = Random.Range(-shakeMagnitude, shakeMagnitude);
+                float offsetY = Random.Range(-shakeMagnitude, shakeMagnitude);
+                transform.position = new Vector3(originalPosition.x + offsetX, originalPosition.y + offsetY, originalPosition.z);
+            }
+            yield return null;
+        }
+
+        transform.position = originalPosition;
 
         float timer = 0f;
         while (timer < _breakDuration)
         {
             timer += Time.deltaTime;
-            _spriteRenderer.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, Mathf.Lerp(1, 0.2f, timer / _breakDuration));
+            _spriteRenderer.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, Mathf.Lerp(_originalColor.a, 0.2f, timer / _breakDuration));
             yield return null;
         }
         _spriteRenderer.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, 0.2f);
@@ -50,11 +88,12 @@ public class FragileTileController : MonoBehaviour
         while (timer < _breakDuration)
         {
             timer += Time.deltaTime;
-            _spriteRenderer.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, Mathf.Lerp(0.2f, 1, timer / _breakDuration));
+            _spriteRenderer.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, Mathf.Lerp(_spriteRenderer.color.a, _originalColor.a, timer / _breakDuration));
             yield return null;
         }
         _spriteRenderer.color = _originalColor;
-        _col.enabled = true;
+        if (_col.isTrigger && IsSS) _col.enabled = false;
+        else _col.enabled = true;
 
         _isBreaking = false;
     }

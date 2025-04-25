@@ -35,15 +35,10 @@ public abstract class Enemy : Character, IDamageable
         StateMachine.Update();
     }
 
-    protected void LateUpdate()
-    {
-        _updateAnimationState?.Invoke();
-    }
-
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
         StateMachine.FixedUpdate();
-        if (_canMove) _move?.Invoke();
+        if (_canMove) base.FixedUpdate();
     }
 
     // public void Move() => _move?.Invoke();

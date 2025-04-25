@@ -2037,9 +2037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec379b2acca3f8047b2d73f5a318a346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chipButtonPrefab: {fileID: 1932519761563899093, guid: c85716b195862ca408f7104624a02a70, type: 3}
-  _equippedChipsPanel: {fileID: 8276562203507169092}
-  _availableChipsPanel: {fileID: 8276562204967507242}
 --- !u!1 &8276562203819137113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,7 +2667,7 @@ MonoBehaviour:
   m_Intensity: 1.1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000000f6bef90d95fc40af31205c08f4b3c8a
+  m_ApplyToSortingLayers: 000000000f6bef90d95fc40af31205c08f4b3c8a977bf6d4
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

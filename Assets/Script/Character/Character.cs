@@ -46,19 +46,28 @@ public abstract class Character : EffectByViewChange
         foreach (StatData stat in DefaultStatsData) CurrentStatsData.TryAdd(stat.Name, stat.Value);
     }
 
-    protected override void ViewChanged(bool isSS)
+    protected virtual void FixedUpdate()
     {
-        base.ViewChanged(isSS);
-        if (isSS)
-        {
-            _move = MoveInSS;
-            _updateAnimationState = UpdateAnimationStateSS;
-        }
-        else
-        {
-            _move = MoveInTD;
-            _updateAnimationState = UpdateAnimationStateTD;
-        }
+        _move?.Invoke();
+    }
+
+    protected virtual void LateUpdate()
+    {
+        _updateAnimationState?.Invoke();
+    }
+
+    protected override void OnSS()
+    {
+        base.OnSS();
+        _move = MoveInSS;
+        _updateAnimationState = UpdateAnimationStateSS;
+    }
+
+    protected override void OnTD()
+    {
+        base.OnTD();
+        _move = MoveInTD;
+        _updateAnimationState = UpdateAnimationStateTD;
     }
 
     protected abstract void MoveInSS();

@@ -4,36 +4,65 @@ using UnityEngine;
 public class BossController : Character, IDamageable
 {
     public enum BossPhase { Phase1, Phase2 }
-    public BossPhase currentPhase = BossPhase.Phase1;
+    public BossPhase CurrentPhase = BossPhase.Phase1;
+    public GameObject BulletPrefab;
+    public GameObject LightningPrefab;
+    public GameObject WarningPrefab;
+    public GameObject BlockPrefab;
+    public GameObject LaserPrefab;
 
-    public GameObject bulletPrefab;
-    public GameObject lightningPrefab;
-    public GameObject warningPrefab;
-    public GameObject blockPrefab;
-    public GameObject laserPrefab;
+    [SerializeField] Color _afterimageColor = Color.white;
+    Vector2 _originalPosition = Vector2.zero;
+    float _attackCooldown = 2f;
+    float _attackTimer = 0f;
 
-    private float attackCooldown = 2f;
-    private float attackTimer = 0f;
+    protected override void Start()
+    {
+        base.Start();
+        _originalPosition = transform.position;
+        StartCoroutine(CAfterimage());
+    }
 
     void Update()
     {
-        attackTimer += Time.deltaTime;
+        _attackTimer += Time.deltaTime;
 
-        if (attackTimer >= attackCooldown)
+        if (_attackTimer >= _attackCooldown)
         {
-            attackTimer = 0f;
+            _attackTimer = 0f;
             PerformAttack();
         }
     }
 
     protected override void MoveInSS()
     {
+        float floatAmplitude = 5f;
+        float floatSpeed = 3f;
+        Vector2 newPosition = _originalPosition + new Vector2(0, Mathf.Sin(Time.time * floatSpeed) * floatAmplitude);
+        transform.position = newPosition;
+    }
 
+    IEnumerator CAfterimage()
+    {
+        while (CurrentStatsData[StatName.Health] > 0)
+        {
+            GameObject afterimage = Instantiate(gameObject, transform.position, transform.rotation);
+            Destroy(afterimage.GetComponent<BossController>()); // Remove the BossController script from the afterimage
+            Destroy(afterimage.GetComponent<Collider2D>()); // Remove any colliders from the afterimage
+
+            if (afterimage.TryGetComponent(out SpriteRenderer spriteRenderer))
+            {
+                spriteRenderer.sortingOrder = -1; // Set the sorting order to be behind the original object
+                spriteRenderer.color = _afterimageColor;
+            }
+            Destroy(afterimage, 0.4f); // Destroy the afterimage after 0.5 seconds
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     protected override void MoveInTD()
     {
-
+        MoveInSS();
     }
 
     protected override void UpdateAnimationStateSS()
@@ -57,7 +86,7 @@ public class BossController : Character, IDamageable
 
     void PerformAttack()
     {
-        if (currentPhase == BossPhase.Phase1)
+        if (CurrentPhase == BossPhase.Phase1)
         {
             int attackType = Random.Range(0, 3);
             switch (attackType)
@@ -73,7 +102,7 @@ public class BossController : Character, IDamageable
                     break;
             }
         }
-        else if (currentPhase == BossPhase.Phase2)
+        else if (CurrentPhase == BossPhase.Phase2)
         {
             int attackType = Random.Range(0, 3);
             switch (attackType)
@@ -100,7 +129,7 @@ public class BossController : Character, IDamageable
         {
             float angle = i * angleStep;
             Vector3 direction = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = direction * 20f;
         }
     }
@@ -108,7 +137,7 @@ public class BossController : Character, IDamageable
     void SummonLightning()
     {
         Vector3 warningPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        GameObject warning = Instantiate(warningPrefab, warningPosition, Quaternion.identity);
+        GameObject warning = Instantiate(WarningPrefab, warningPosition, Quaternion.identity);
         Destroy(warning, 1f);
 
         Invoke(nameof(SpawnLightning), 1f);
@@ -117,13 +146,13 @@ public class BossController : Character, IDamageable
     void SpawnLightning()
     {
         Vector3 lightningPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        Instantiate(lightningPrefab, lightningPosition, Quaternion.identity);
+        Instantiate(LightningPrefab, lightningPosition, Quaternion.identity);
     }
 
     void SummonBlock()
     {
         Vector3 warningPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        GameObject warning = Instantiate(warningPrefab, warningPosition, Quaternion.identity);
+        GameObject warning = Instantiate(WarningPrefab, warningPosition, Quaternion.identity);
         Destroy(warning, 1f);
 
         Invoke(nameof(SpawnBlock), 1f);
@@ -132,13 +161,13 @@ public class BossController : Character, IDamageable
     void SpawnBlock()
     {
         Vector3 blockPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        Instantiate(blockPrefab, blockPosition, Quaternion.identity);
+        Instantiate(BlockPrefab, blockPosition, Quaternion.identity);
     }
 
     void FireLaser()
     {
         Vector3 warningPosition = transform.position;
-        GameObject warning = Instantiate(warningPrefab, warningPosition, Quaternion.identity);
+        GameObject warning = Instantiate(WarningPrefab, warningPosition, Quaternion.identity);
         Destroy(warning, 1f);
 
         Invoke(nameof(SpawnLaser), 1f);
@@ -146,8 +175,9 @@ public class BossController : Character, IDamageable
 
     void SpawnLaser()
     {
-        Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        Instantiate(LaserPrefab, transform.position, Quaternion.identity);
     }
+
     IEnumerator FireFanBullets()
     {
         int bulletCount = 7;
@@ -164,10 +194,16 @@ public class BossController : Character, IDamageable
             {
                 float angle = baseAngle + startAngle + j * angleStep;
                 Vector3 direction = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * 20f;
             }
             yield return new WaitForSeconds(0.3f);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ce4890f692d73545b67fac15985d5e1
+guid: 656e48f5dbe4b0947a4bceb7c8f86625
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -103,28 +103,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: HP_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2153
-        height: 596
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f45482296a26cc649adb1c99c9321bf6
-      internalID: -2003812684
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -135,8 +114,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      HP_0: -2003812684
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
