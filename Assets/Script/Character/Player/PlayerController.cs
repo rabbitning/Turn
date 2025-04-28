@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -68,6 +67,8 @@ public class PlayerController : Character, IDamageable
 
     void Update()
     {
+        if(!CanMove) return;
+        
         HandleInput();
         // _attack?.Invoke();
         HandleAttack();

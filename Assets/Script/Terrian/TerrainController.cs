@@ -61,7 +61,7 @@ public class TerrainController : EffectByViewChange
                 tilePositions.Add(currentPosition);
                 tilesToReplace.Add(IsSS ? ruleTileData.RuleSS : ruleTileData.RuleTD);
 
-                if (tilePositions.Count >= 700)
+                if (tilePositions.Count >= 600)
                 {
                     ruleTileData.Tilemap.SetTiles(tilePositions.ToArray(), tilesToReplace.ToArray());
                     tilePositions.Clear();

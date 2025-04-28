@@ -8,6 +8,7 @@ public class GameManager : EffectByViewChange
     public static GameManager Instance { get; private set; }
     public PlayerController Player { get; private set; }
     [HideInInspector] public UnityEvent<bool> OnViewChanged = new();
+    [HideInInspector] public bool IsPaused = false;
     [SerializeField] bool _isSideScroll = true;
     public bool GetView() => _isSideScroll;
     public void SetView(bool nextView)
@@ -62,6 +63,7 @@ public class GameManager : EffectByViewChange
 
     void Update()
     {
+        if (IsPaused) return;
         HandleInput();
 
         _viewChangeCooldownTimer += Time.deltaTime;

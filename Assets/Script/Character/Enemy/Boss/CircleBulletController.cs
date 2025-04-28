@@ -17,7 +17,7 @@ public class CircleBulletController : MonoBehaviour
             player.Damage(_damage);
             End();
         }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) End();
+        // else if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) End();
     }
 
     void End()

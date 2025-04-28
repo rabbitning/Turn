@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Diagnostics;
 using UnityEngine;
 
 public class BossController : Character, IDamageable
@@ -8,27 +7,49 @@ public class BossController : Character, IDamageable
     public BossPhase CurrentPhase = BossPhase.Phase1;
 
     [Space(10)]
-    [SerializeField] GameObject BulletPrefab;
+    [SerializeField] GameObject _bulletPortalPrefab = null;
+    [SerializeField] float _bulletPortalDistance = 5f;
+
+    [Space(10)]
+    [SerializeField] GameObject _bulletPrefab = null;
     [SerializeField] float _bulletSpeed = 20f;
 
     [Space(10)]
-    [SerializeField] GameObject LightningPrefab;
+    [SerializeField] GameObject _lightningPrefab = null;
     [SerializeField] Vector2[] _lightningPosition = new Vector2[2];
 
     [Space(10)]
-    [SerializeField] GameObject WarningPrefab;
+    [SerializeField] GameObject _boxWarningPrefab = null;
+    [SerializeField] GameObject _circleWarningPrefab = null;
 
     [Space(10)]
-    [SerializeField] GameObject BlockPrefab;
+    [SerializeField] GameObject _blockPrefab = null;
 
     [Space(10)]
-    [SerializeField] GameObject LaserPrefab;
+    [SerializeField] GameObject _laserPrefab = null;
+
+    [Space(10)]
+    [SerializeField] GameObject _movingSpikePrefab = null;
+    [SerializeField] float _movingSpikeSpeed = 40f;
+    [SerializeField] float _movingSpikeDistance = 50f;
+    [SerializeField] float _movingSpikeOffset = 25f;
+    [SerializeField] Vector2 _movingSpikeSize = Vector2.zero;
 
     [Space(10)]
     [SerializeField] Color _afterimageColor = Color.white;
     [SerializeField] float _attackCooldown = 2f;
+
+    SpriteRenderer _spriteRenderer = null;
+    Color _originalColor = Color.white;
     Vector2 _originalPosition = Vector2.zero;
     float _attackTimer = 0f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _originalColor = _spriteRenderer.color;
+    }
 
     protected override void Start()
     {
@@ -39,6 +60,8 @@ public class BossController : Character, IDamageable
 
     void Update()
     {
+        if (!CanMove) return;
+
         _attackTimer += Time.deltaTime;
 
         if (_attackTimer >= _attackCooldown)
@@ -94,8 +117,27 @@ public class BossController : Character, IDamageable
         SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.Health] - value);
         if (CurrentStatsData[StatName.Health] <= 0)
         {
-            // Die();
+            if (CurrentPhase == BossPhase.Phase1)
+            {
+                CurrentPhase = BossPhase.Phase2;
+                SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.MaxHealth]);
+            }
+            else
+            {
+                Destroy(gameObject, 0.5f);
+            }
         }
+        else
+        {
+            StartCoroutine(CDamaged());
+        }
+    }
+
+    IEnumerator CDamaged()
+    {
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _spriteRenderer.color = _originalColor;
     }
 
     void PerformAttack()
@@ -106,7 +148,8 @@ public class BossController : Character, IDamageable
             switch (attackType)
             {
                 case 0:
-                    StartCoroutine(CFireBullets(5, 0.2f));
+                    // StartCoroutine(CFireBullets(5, 0.2f));
+                    SummonBulletPortal(_bulletPortalDistance);
                     break;
                 case 1:
                     SummonLightning(1f);
@@ -118,33 +161,53 @@ public class BossController : Character, IDamageable
         }
         else if (CurrentPhase == BossPhase.Phase2)
         {
-            int attackType = Random.Range(0, 3);
+            int attackType = Random.Range(0, 4);
             switch (attackType)
             {
                 case 0:
-                    // FireLaser();
-                    break;
+                // FireLaser();
+                // break;
                 case 1:
                     StartCoroutine(CFireFanBullets(5, 0.3f));
                     break;
                 case 2:
-                    // SummonBlock();
+                // SummonBlock();
+                // break;
+                case 3:
+                    SummonMovingSpike(2f);
+                    // _attackTimer -= 1f;
                     break;
             }
         }
     }
 
-    IEnumerator CFireBullets(int amount, float fireRate)
+    void SummonBulletPortal(float distanceFromPlayer)
     {
-        for (int i = 0; i < amount; i++)
+        Vector2 playerPos = PlayerController.Instance.transform.position;
+        Vector2 randomDirection;
+        do
         {
-            Vector2 direction = (PlayerController.Instance.transform.position - transform.position).normalized;
-            GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = direction * _bulletSpeed;
+            randomDirection = Random.insideUnitCircle;
+        } while (Vector2.Dot(randomDirection, Vector2.up) > 0.9f);
 
-            yield return new WaitForSeconds(fireRate);
-        }
+        randomDirection = (randomDirection + Mathf.Sign(randomDirection.x) * Vector2.right).normalized;
+
+        Vector2 spawnPosition = playerPos + randomDirection * distanceFromPlayer;
+
+        Instantiate(_bulletPortalPrefab, spawnPosition, Quaternion.identity);
     }
+
+    // IEnumerator CFireBullets(int amount, float fireRate)
+    // {
+    //     for (int i = 0; i < amount; i++)
+    //     {
+    //         Vector2 direction = (PlayerController.Instance.transform.position - transform.position).normalized;
+    //         GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+    //         bullet.GetComponent<Rigidbody2D>().velocity = direction * _bulletSpeed;
+
+    //         yield return new WaitForSeconds(fireRate);
+    //     }
+    // }
 
     void SummonLightning(/*int amount,*/ float delay = 1f)
     {
@@ -152,13 +215,13 @@ public class BossController : Character, IDamageable
         for (float i = xOffset; i <= _lightningPosition[1].x; i += 5)
         {
             Vector2 startPos = new(_lightningPosition[0].x + i, _lightningPosition[0].y);
-            StartCoroutine(CSpawnWarning(startPos, delay));
+            StartCoroutine(CSpawnWarningBox(startPos, delay, WarningType.Lightning, Vector2.down, Vector2.right * 1.5f));
             StartCoroutine(CSpawnLightning(startPos, delay));
         }
     }
 
-    enum WarningType { Lightning, Laser, Block }
-    IEnumerator CSpawnWarning(Vector2 position, float delay, WarningType type = WarningType.Lightning)
+    enum WarningType { Lightning, Laser, Block, movingSpike }
+    IEnumerator CSpawnWarningBox(Vector2 position, float delay, WarningType type, Vector2 direction, Vector2 size)
     {
         GameObject warning = null;
         SpriteRenderer spriteRenderer = null;
@@ -166,14 +229,21 @@ public class BossController : Character, IDamageable
         switch (type)
         {
             case WarningType.Lightning:
-                RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, 100f, LayerMask.GetMask("Ground"));
-                warning = Instantiate(WarningPrefab, position + Vector2.up, Quaternion.identity);
+                RaycastHit2D hit = Physics2D.Raycast(position, direction, 100f, LayerMask.GetMask("Ground"));
+                warning = Instantiate(_boxWarningPrefab, position - direction, Quaternion.identity);
                 spriteRenderer = warning.GetComponent<SpriteRenderer>();
-                spriteRenderer.size = new Vector2(spriteRenderer.size.x, hit.distance + 1f);
+                size.y = hit.distance + 1f;
+                spriteRenderer.size = size;
                 break;
             case WarningType.Laser:
                 break;
             case WarningType.Block:
+                break;
+            case WarningType.movingSpike:
+                warning = Instantiate(_boxWarningPrefab, position, Quaternion.LookRotation(Vector3.forward, direction));
+                spriteRenderer = warning.GetComponent<SpriteRenderer>();
+                size.y *= -1;
+                spriteRenderer.size = size;
                 break;
             default:
                 yield break;
@@ -205,13 +275,13 @@ public class BossController : Character, IDamageable
     IEnumerator CSpawnLightning(Vector2 position, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Instantiate(LightningPrefab, position, Quaternion.identity);
+        Instantiate(_lightningPrefab, position, Quaternion.identity);
     }
 
     void SummonBlock()
     {
         Vector3 warningPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        GameObject warning = Instantiate(WarningPrefab, warningPosition, Quaternion.identity);
+        GameObject warning = Instantiate(_boxWarningPrefab, warningPosition, Quaternion.identity);
         Destroy(warning, 1f);
 
         Invoke(nameof(SpawnBlock), 1f);
@@ -220,13 +290,13 @@ public class BossController : Character, IDamageable
     void SpawnBlock()
     {
         Vector3 blockPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        Instantiate(BlockPrefab, blockPosition, Quaternion.identity);
+        Instantiate(_blockPrefab, blockPosition, Quaternion.identity);
     }
 
     void FireLaser()
     {
         Vector3 warningPosition = transform.position;
-        GameObject warning = Instantiate(WarningPrefab, warningPosition, Quaternion.identity);
+        GameObject warning = Instantiate(_boxWarningPrefab, warningPosition, Quaternion.identity);
         Destroy(warning, 1f);
 
         Invoke(nameof(SpawnLaser), 1f);
@@ -234,7 +304,7 @@ public class BossController : Character, IDamageable
 
     void SpawnLaser()
     {
-        Instantiate(LaserPrefab, transform.position, Quaternion.identity);
+        Instantiate(_laserPrefab, transform.position, Quaternion.identity);
     }
 
     IEnumerator CFireFanBullets(int amount, float fireRate)
@@ -253,11 +323,29 @@ public class BossController : Character, IDamageable
             {
                 float angle = baseAngle + startAngle + j * angleStep;
                 Vector3 direction = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
-                GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * 20f;
             }
             yield return new WaitForSeconds(fireRate);
         }
+    }
+
+    void SummonMovingSpike(float delay)
+    {
+        Vector2 playerPos = PlayerController.Instance.transform.position;
+        Vector2[] directions = { Vector2.right, Vector2.left, Vector2.up, Vector2.down };
+        Vector2 diraction = directions[Random.Range(0, directions.Length)];
+        Vector2 startpoint = playerPos - diraction * _movingSpikeOffset;
+        StartCoroutine(CSpawnWarningBox(startpoint, delay, WarningType.movingSpike, diraction, _movingSpikeSize));
+        StartCoroutine(CSpawnMovingSpike(startpoint, diraction, delay));
+    }
+
+    IEnumerator CSpawnMovingSpike(Vector2 position, Vector2 diraction, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        GameObject movingSpike = Instantiate(_movingSpikePrefab, position, Quaternion.LookRotation(Vector3.forward, diraction));
+        movingSpike.GetComponent<MovingSpikeController>().Init(_movingSpikeSpeed, _movingSpikeDistance);
     }
 
     private void OnDrawGizmosSelected()

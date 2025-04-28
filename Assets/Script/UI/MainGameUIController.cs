@@ -10,6 +10,10 @@ public class MainGameUIController : UIController
     [SerializeField] TextMeshProUGUI _playerHpNum = null;
     PlayerController _player = null;
 
+    [Space(10)]
+    [SerializeField] BossController _boss = null;
+    [SerializeField] Image _bossHpBar = null;
+
     protected override void Start()
     {
         base.Start();
@@ -19,6 +23,7 @@ public class MainGameUIController : UIController
     void LateUpdate()
     {
         UpdatePlayerHp();
+        UpdateBossHp();
     }
 
     void UpdatePlayerHp()
@@ -32,6 +37,18 @@ public class MainGameUIController : UIController
 
         _playerHpBar.fillAmount = Mathf.Lerp(_playerHpBar.fillAmount, currentHealth / maxHealth, Time.deltaTime * 5 + 0.01f);
         _playerHpNum.SetText($"{Mathf.FloorToInt(currentHealth)} / {Mathf.FloorToInt(maxHealth)}");
+    }
+
+    void UpdateBossHp()
+    {
+        if (_boss == null) return;
+
+        float currentHealth = _boss.CurrentStatsData[StatName.Health];
+        float maxHealth = _boss.CurrentStatsData[StatName.MaxHealth];
+
+        if (maxHealth <= 0) return;
+
+        _bossHpBar.fillAmount = Mathf.Lerp(_bossHpBar.fillAmount, currentHealth / maxHealth, Time.deltaTime * 5 + 0.01f);
     }
 
     protected override void ViewChanged(bool nextView)

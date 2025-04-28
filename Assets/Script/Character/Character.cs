@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Character : EffectByViewChange
 {
+    [HideInInspector] public bool CanMove = true;
     protected Action _move = null;
     protected Action _updateAnimationState = null;
 

@@ -657,6 +657,8 @@ MonoBehaviour:
   _viewChangeCdImg: {fileID: 8276562203245159748}
   _playerHpBar: {fileID: 8276562204371509750}
   _playerHpNum: {fileID: 8276562204681924507}
+  _boss: {fileID: 0}
+  _bossHpBar: {fileID: 0}
 --- !u!1 &8276562203237447349
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,7 +3050,7 @@ MonoBehaviour:
   m_ScreenY: 0.5
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.15
-  m_DeadZoneHeight: 0.15
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
