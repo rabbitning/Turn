@@ -226,7 +226,7 @@ public class PlayerController : Character, IDamageable
 
     protected override void MoveInSS()
     {
-        if (transform.position.y < -20 && CurrentStatsData[StatName.Invincible] == 0)
+        if (transform.position.y < -40 && CurrentStatsData[StatName.Invincible] == 0)
         {
             Damage(10);
             if (CurrentStatsData[StatName.Health] > 0) ResetPlayerPosition();

@@ -39,6 +39,7 @@ public class BossController : Character, IDamageable
     [SerializeField] Color _afterimageColor = Color.white;
     [SerializeField] float _attackCooldown = 2f;
 
+    Animator _animator = null;
     SpriteRenderer _spriteRenderer = null;
     Color _originalColor = Color.white;
     Vector2 _originalPosition = Vector2.zero;
@@ -47,6 +48,7 @@ public class BossController : Character, IDamageable
     protected override void Awake()
     {
         base.Awake();
+        _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
     }
@@ -55,7 +57,7 @@ public class BossController : Character, IDamageable
     {
         base.Start();
         _originalPosition = transform.position;
-        StartCoroutine(CAfterimage());
+        _spriteRenderer.enabled = false;
     }
 
     void Update()
@@ -84,6 +86,7 @@ public class BossController : Character, IDamageable
         MoveInSS();
     }
 
+
     IEnumerator CAfterimage()
     {
         while (CurrentStatsData[StatName.Health] > 0)
@@ -98,7 +101,7 @@ public class BossController : Character, IDamageable
                 spriteRenderer.color = _afterimageColor;
             }
             Destroy(afterimage, 0.4f); // Destroy the afterimage after 0.5 seconds
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
@@ -112,6 +115,12 @@ public class BossController : Character, IDamageable
 
     }
 
+    public void Entry()
+    {
+        _spriteRenderer.enabled = true;
+        _animator.SetTrigger("Entry");
+    }
+
     public void Damage(float value)
     {
         SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.Health] - value);
@@ -120,6 +129,7 @@ public class BossController : Character, IDamageable
             if (CurrentPhase == BossPhase.Phase1)
             {
                 CurrentPhase = BossPhase.Phase2;
+                _animator.SetTrigger("Phase2");
                 SetCurrentStatsData(StatName.Health, CurrentStatsData[StatName.MaxHealth]);
             }
             else
@@ -144,7 +154,7 @@ public class BossController : Character, IDamageable
     {
         if (CurrentPhase == BossPhase.Phase1)
         {
-            int attackType = Random.Range(0, 3);
+            int attackType = Random.Range(0, 2);
             switch (attackType)
             {
                 case 0:

@@ -63,6 +63,10 @@ public class GameManager : EffectByViewChange
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // refresh scene
+        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // next scene
+        if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1); // previous scene
+
         if (IsPaused) return;
         HandleInput();
 

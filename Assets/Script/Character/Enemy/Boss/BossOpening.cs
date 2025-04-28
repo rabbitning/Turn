@@ -20,20 +20,24 @@ public class BossOpening : MonoBehaviour
         CinemachineFramingTransposer transposer = _camera.GetCinemachineComponent<CinemachineFramingTransposer>();
         _originalCameraDeadZone = new Vector2(transposer.m_DeadZoneWidth, transposer.m_DeadZoneHeight);
 
-        _player = GameManager.Instance.Player;
+        _player = PlayerController.Instance;
         GameManager.Instance.IsPaused = true;
         _player.CanMove = _boss.CanMove = false;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
-        _camera.m_Follow = _boss.transform;
         transposer.m_DeadZoneWidth = transposer.m_DeadZoneHeight = 0;
+        _camera.m_Follow = _boss.transform;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
-        _camera.m_Follow = _player.transform;
+        _boss.Entry();
+
+        yield return new WaitForSeconds(4f);
+
         transposer.m_DeadZoneWidth = _originalCameraDeadZone.x;
         transposer.m_DeadZoneHeight = _originalCameraDeadZone.y;
+        _camera.m_Follow = _player.transform;
 
         GameManager.Instance.IsPaused = false;
         _player.CanMove = _boss.CanMove = true;

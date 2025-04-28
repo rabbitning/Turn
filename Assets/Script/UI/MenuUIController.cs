@@ -21,10 +21,10 @@ public class MenuUIController : UIController
             TogglePause();
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            ToggleChipsMenu();
-        }
+        // if (Input.GetKeyDown(KeyCode.Tab))
+        // {
+        //     ToggleChipsMenu();
+        // }
     }
 
     public void TogglePause()

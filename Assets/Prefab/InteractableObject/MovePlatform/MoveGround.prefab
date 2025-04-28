@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plate: {fileID: 4895269303578201415}
-  _speed: 5
+  _speed: 4
   Points: []
 --- !u!1 &4895269303578201415
 GameObject:

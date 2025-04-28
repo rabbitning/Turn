@@ -5,7 +5,7 @@ public class UIController : EffectByViewChange
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("GamePlay");
+        SceneManager.LoadScene("Level1");
     }
 
     public void ToStartMenu()

@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 7324344827303119835}
   m_Layer: 8
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,10 +352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3f54ac5d7ede746b76c800894e37a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showInSS: []
-  _showInTD: []
-  _viewChangeSprites: []
-  _doorUp: {fileID: 1210150316129082020}
-  _doorDown: {fileID: 1210150317277792491}
+  _defaultClose: 1
+  _doorMask: {fileID: 4471311055687606231}
+  _doorUp: {fileID: 1210150316129082022}
+  _doorDown: {fileID: 1210150317277792405}
   _openSize: 4
   _openSpeed: 3
