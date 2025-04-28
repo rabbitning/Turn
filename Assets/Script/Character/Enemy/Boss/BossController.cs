@@ -1,19 +1,33 @@
 using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 
 public class BossController : Character, IDamageable
 {
     public enum BossPhase { Phase1, Phase2 }
     public BossPhase CurrentPhase = BossPhase.Phase1;
-    public GameObject BulletPrefab;
-    public GameObject LightningPrefab;
-    public GameObject WarningPrefab;
-    public GameObject BlockPrefab;
-    public GameObject LaserPrefab;
 
+    [Space(10)]
+    [SerializeField] GameObject BulletPrefab;
+    [SerializeField] float _bulletSpeed = 20f;
+
+    [Space(10)]
+    [SerializeField] GameObject LightningPrefab;
+    [SerializeField] Vector2[] _lightningPosition = new Vector2[2];
+
+    [Space(10)]
+    [SerializeField] GameObject WarningPrefab;
+
+    [Space(10)]
+    [SerializeField] GameObject BlockPrefab;
+
+    [Space(10)]
+    [SerializeField] GameObject LaserPrefab;
+
+    [Space(10)]
     [SerializeField] Color _afterimageColor = Color.white;
+    [SerializeField] float _attackCooldown = 2f;
     Vector2 _originalPosition = Vector2.zero;
-    float _attackCooldown = 2f;
     float _attackTimer = 0f;
 
     protected override void Start()
@@ -36,10 +50,15 @@ public class BossController : Character, IDamageable
 
     protected override void MoveInSS()
     {
-        float floatAmplitude = 5f;
-        float floatSpeed = 3f;
+        float floatAmplitude = 3f;
+        float floatSpeed = 2f;
         Vector2 newPosition = _originalPosition + new Vector2(0, Mathf.Sin(Time.time * floatSpeed) * floatAmplitude);
         transform.position = newPosition;
+    }
+
+    protected override void MoveInTD()
+    {
+        MoveInSS();
     }
 
     IEnumerator CAfterimage()
@@ -58,11 +77,6 @@ public class BossController : Character, IDamageable
             Destroy(afterimage, 0.4f); // Destroy the afterimage after 0.5 seconds
             yield return new WaitForSeconds(0.1f);
         }
-    }
-
-    protected override void MoveInTD()
-    {
-        MoveInSS();
     }
 
     protected override void UpdateAnimationStateSS()
@@ -92,14 +106,14 @@ public class BossController : Character, IDamageable
             switch (attackType)
             {
                 case 0:
-                    FireCircularBullets();
+                    StartCoroutine(CFireBullets(5, 0.2f));
                     break;
                 case 1:
-                    SummonLightning();
+                    SummonLightning(1f);
                     break;
-                case 2:
-                    SummonBlock();
-                    break;
+                    // case 2:
+                    // SummonBlock();
+                    // break;
             }
         }
         else if (CurrentPhase == BossPhase.Phase2)
@@ -108,45 +122,90 @@ public class BossController : Character, IDamageable
             switch (attackType)
             {
                 case 0:
-                    FireLaser();
+                    // FireLaser();
                     break;
                 case 1:
-                    StartCoroutine(FireFanBullets());
+                    StartCoroutine(CFireFanBullets(5, 0.3f));
                     break;
                 case 2:
-                    SummonBlock();
+                    // SummonBlock();
                     break;
             }
         }
     }
 
-    void FireCircularBullets()
+    IEnumerator CFireBullets(int amount, float fireRate)
     {
-        int bulletCount = 12;
-        float angleStep = 360f / bulletCount;
-
-        for (int i = 0; i < bulletCount; i++)
+        for (int i = 0; i < amount; i++)
         {
-            float angle = i * angleStep;
-            Vector3 direction = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
+            Vector2 direction = (PlayerController.Instance.transform.position - transform.position).normalized;
             GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = direction * 20f;
+            bullet.GetComponent<Rigidbody2D>().velocity = direction * _bulletSpeed;
+
+            yield return new WaitForSeconds(fireRate);
         }
     }
 
-    void SummonLightning()
+    void SummonLightning(/*int amount,*/ float delay = 1f)
     {
-        Vector3 warningPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        GameObject warning = Instantiate(WarningPrefab, warningPosition, Quaternion.identity);
-        Destroy(warning, 1f);
-
-        Invoke(nameof(SpawnLightning), 1f);
+        float xOffset = Random.Range(.5f, 4.5f);
+        for (float i = xOffset; i <= _lightningPosition[1].x; i += 5)
+        {
+            Vector2 startPos = new(_lightningPosition[0].x + i, _lightningPosition[0].y);
+            StartCoroutine(CSpawnWarning(startPos, delay));
+            StartCoroutine(CSpawnLightning(startPos, delay));
+        }
     }
 
-    void SpawnLightning()
+    enum WarningType { Lightning, Laser, Block }
+    IEnumerator CSpawnWarning(Vector2 position, float delay, WarningType type = WarningType.Lightning)
     {
-        Vector3 lightningPosition = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0);
-        Instantiate(LightningPrefab, lightningPosition, Quaternion.identity);
+        GameObject warning = null;
+        SpriteRenderer spriteRenderer = null;
+
+        switch (type)
+        {
+            case WarningType.Lightning:
+                RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, 100f, LayerMask.GetMask("Ground"));
+                warning = Instantiate(WarningPrefab, position + Vector2.up, Quaternion.identity);
+                spriteRenderer = warning.GetComponent<SpriteRenderer>();
+                spriteRenderer.size = new Vector2(spriteRenderer.size.x, hit.distance + 1f);
+                break;
+            case WarningType.Laser:
+                break;
+            case WarningType.Block:
+                break;
+            default:
+                yield break;
+        }
+
+        Destroy(warning, delay);
+
+        Color originalColor = spriteRenderer.color;
+        float fadeDuration = delay / 2f - .1f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, originalColor.a, elapsedTime / fadeDuration);
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+        elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(originalColor.a, 0f, elapsedTime / fadeDuration);
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+    }
+
+    IEnumerator CSpawnLightning(Vector2 position, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Instantiate(LightningPrefab, position, Quaternion.identity);
     }
 
     void SummonBlock()
@@ -178,7 +237,7 @@ public class BossController : Character, IDamageable
         Instantiate(LaserPrefab, transform.position, Quaternion.identity);
     }
 
-    IEnumerator FireFanBullets()
+    IEnumerator CFireFanBullets(int amount, float fireRate)
     {
         int bulletCount = 7;
         float angleStep = 15f;
@@ -188,7 +247,7 @@ public class BossController : Character, IDamageable
         Vector3 directionToPlayer = (playerPosition - transform.position).normalized;
         float baseAngle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < amount; i++)
         {
             for (int j = 0; j < bulletCount; j++)
             {
@@ -197,13 +256,13 @@ public class BossController : Character, IDamageable
                 GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * 20f;
             }
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(fireRate);
         }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-
+        Gizmos.DrawLine(_lightningPosition[0], _lightningPosition[1]);
     }
 }
