@@ -26,12 +26,12 @@ public class DoorController : MonoBehaviour
         EditorApplication.delayCall += () =>
         {
             if (this == null) return; // 確保物件未被刪除
-            UpdateDoorProperties();
+            OnEnable();
         };
     }
 #endif
 
-    void UpdateDoorProperties()
+    void OnEnable()
     {
         _originalPosition = _doorMask.localPosition;
         _doorMask.localScale = new Vector3(_doorMask.localScale.x, _openSize * 2, _doorMask.localScale.z);

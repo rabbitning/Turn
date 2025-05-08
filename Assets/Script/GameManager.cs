@@ -68,7 +68,7 @@ public class GameManager : EffectByViewChange
         if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1); // previous scene
 
         if (IsPaused) return;
-        HandleInput();
+        // HandleInput();
 
         _viewChangeCooldownTimer += Time.deltaTime;
     }
@@ -87,14 +87,14 @@ public class GameManager : EffectByViewChange
         _viewChangeCooldownTimer = 0;
     }
 
-    void HandleInput()
-    {
-        if (Time.timeScale == 0) return;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            SetView(!_isSideScroll);
-        }
-    }
+    // void HandleInput()
+    // {
+    //     if (Time.timeScale == 0) return;
+    //     if (Input.GetKeyDown(KeyCode.LeftShift))
+    //     {
+    //         SetView(!_isSideScroll);
+    //     }
+    // }
 
     public void Win()
     {

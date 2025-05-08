@@ -63,12 +63,13 @@ public class PlayerController : Character, IDamageable
         _animator = GetComponent<Animator>();
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _inputData.CanInput = true;
+        _groundCheckDataSS.LastGroundedPosition = _groundCheckDataTD.LastGroundedPosition = transform.position;
     }
 
     void Update()
     {
-        if(!CanMove) return;
-        
+        if (!CanMove) return;
+
         HandleInput();
         // _attack?.Invoke();
         HandleAttack();
@@ -88,6 +89,7 @@ public class PlayerController : Character, IDamageable
     {
         base.ViewChanged(isSS);
         _rb.velocity = _movementData.CurrentVelocity = Vector2.zero;
+        _movementData.JumpBufferTimer = _movementData.CoyoteTimer = 0;
         ResetInput();
     }
 
@@ -124,6 +126,8 @@ public class PlayerController : Character, IDamageable
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift)) GameManager.Instance.SetView(!IsSS);
+
         _inputData.MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Input.GetButtonDown("Jump")) _inputData.JumpInput.x = true;
@@ -143,7 +147,7 @@ public class PlayerController : Character, IDamageable
         _inputData.MoveInput = Vector2.zero;
         _inputData.JumpInput = false;
         _inputData.AttackInput = false;
-        _inputData.SkillInput = new bool3();
+        // _inputData.SkillInput = new bool3();
     }
 
     // void HandleAttackSS()
@@ -207,11 +211,11 @@ public class PlayerController : Character, IDamageable
     {
         Collider2D col = Physics2D.OverlapBox(_rb.position + _groundCheckDataSS.GroundCheckOffset, _groundCheckDataSS.GroundCheckSize, 0, _groundCheckDataSS.GroundLayer);
         _groundCheckDataSS.IsGrounded = col;
-        if (_groundCheckDataSS.IsGrounded && !col.CompareTag("Platform")) _groundCheckDataSS.LastGroundedPosition = transform.position;
+        if (IsSS && _groundCheckDataSS.IsGrounded && !col.CompareTag("Platform")) _groundCheckDataSS.LastGroundedPosition = transform.position;
 
         col = Physics2D.OverlapBox(_rb.position + _groundCheckDataTD.GroundCheckOffset, _groundCheckDataTD.GroundCheckSize, 0, _groundCheckDataTD.GroundLayer);
         _groundCheckDataTD.IsGrounded = col;
-        if (_groundCheckDataTD.IsGrounded && !col.CompareTag("Platform")) _groundCheckDataTD.LastGroundedPosition = transform.position;
+        if (!IsSS && _groundCheckDataTD.IsGrounded && !col.CompareTag("Platform")) _groundCheckDataTD.LastGroundedPosition = transform.position;
     }
 
     void WallCheck()
@@ -259,7 +263,9 @@ public class PlayerController : Character, IDamageable
 
     protected override void MoveInTD()
     {
-        if (!_groundCheckDataTD.IsGrounded && CurrentStatsData[StatName.Invincible] == 0)
+        _movementData.CoyoteTimer = _groundCheckDataTD.IsGrounded ? _movementData.CoyoteTime : _movementData.CoyoteTimer - Time.fixedDeltaTime;
+
+        if (_movementData.CoyoteTimer < 0 && CurrentStatsData[StatName.Invincible] == 0)
         {
             Damage(10);
             if (CurrentStatsData[StatName.Health] > 0) ResetPlayerPosition();
@@ -281,13 +287,29 @@ public class PlayerController : Character, IDamageable
     IEnumerator CResetPlayerPosition(Vector2 newPosition)
     {
         _inputData.CanInput = false;
+        ResetInput();
         transform.SetParent(null);
         _rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(.2f);
 
+        yield return new WaitForSeconds(0.5f);
+
+        float elapsedTime = 0f;
+        float duration = 0.5f;
+        Vector2 startingPosition = transform.position;
+
+        StartCoroutine(CSetInvincible(duration));
+        _col.enabled = false;
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector2.Lerp(startingPosition, newPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
         transform.position = newPosition;
-        yield return new WaitForSeconds(.5f);
 
+        yield return new WaitForSeconds(0.5f);
+
+        _col.enabled = true;
         _inputData.CanInput = true;
     }
 

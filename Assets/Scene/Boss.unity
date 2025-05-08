@@ -452,7 +452,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: 62
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
@@ -460,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: -11
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
@@ -468,19 +468,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
-      value: -11
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
-      value: -6
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: 62
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 5806331714030469592, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: -6
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 8276562203180297274, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: _boss
@@ -492,11 +492,11 @@ PrefabInstance:
       objectReference: {fileID: 1836943409}
     - target: {fileID: 8276562203564215598, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.333333
+      value: 7.333333
       objectReference: {fileID: 0}
     - target: {fileID: 8276562203564215598, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8276562205228760298, guid: aaa3562a37951f74080ddac7f4cb1b4e, type: 3}
       propertyPath: m_Name
@@ -1064,31 +1064,139 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 2052942257963343237}
     m_ColliderPaths:
-    - - X: 240000000
-        Y: -12500000
+    - - X: 185624992
+        Y: -10000000
+      - X: 184375008
+        Y: -10000000
       - X: 180000000
-        Y: -12500000
-      - X: 180000000
+        Y: -20000000
+      - X: 190000000
+        Y: -20000000
+    - - X: 195624992
+        Y: -10000000
+      - X: 194375008
+        Y: -10000000
+      - X: 190000000
+        Y: -20000000
+      - X: 200000000
+        Y: -20000000
+    - - X: 205624992
+        Y: -10000000
+      - X: 204375008
+        Y: -10000000
+      - X: 200000000
+        Y: -20000000
+      - X: 210000000
+        Y: -20000000
+    - - X: 215624992
+        Y: -10000000
+      - X: 214375008
+        Y: -10000000
+      - X: 210000000
+        Y: -20000000
+      - X: 220000000
+        Y: -20000000
+    - - X: 225624992
+        Y: -10000000
+      - X: 224375008
+        Y: -10000000
+      - X: 220000000
+        Y: -20000000
+      - X: 230000000
+        Y: -20000000
+    - - X: 235624992
+        Y: -10000000
+      - X: 234375008
+        Y: -10000000
+      - X: 230000000
         Y: -20000000
       - X: 240000000
         Y: -20000000
-    - - X: 330000000
-        Y: -12500000
+    - - X: 285624992
+        Y: -10000000
+      - X: 284375008
+        Y: -10000000
       - X: 280000000
-        Y: -12500000
-      - X: 280000000
+        Y: -20000000
+      - X: 290000000
+        Y: -20000000
+    - - X: 295624992
+        Y: -10000000
+      - X: 294375008
+        Y: -10000000
+      - X: 290000000
+        Y: -20000000
+      - X: 300000000
+        Y: -20000000
+    - - X: 305624992
+        Y: -10000000
+      - X: 304375008
+        Y: -10000000
+      - X: 300000000
+        Y: -20000000
+      - X: 310000000
+        Y: -20000000
+    - - X: 315624992
+        Y: -10000000
+      - X: 314375008
+        Y: -10000000
+      - X: 310000000
+        Y: -20000000
+      - X: 320000000
+        Y: -20000000
+    - - X: 325624992
+        Y: -10000000
+      - X: 324375008
+        Y: -10000000
+      - X: 320000000
         Y: -20000000
       - X: 330000000
         Y: -20000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 24, y: -1.25}
-      - {x: 18, y: -1.25}
+    - - {x: 18.5625, y: -1}
+      - {x: 18.437502, y: -1}
       - {x: 18, y: -2}
+      - {x: 19, y: -2}
+    - - {x: 19.5625, y: -1}
+      - {x: 19.437502, y: -1}
+      - {x: 19, y: -2}
+      - {x: 20, y: -2}
+    - - {x: 20.5625, y: -1}
+      - {x: 20.437502, y: -1}
+      - {x: 20, y: -2}
+      - {x: 21, y: -2}
+    - - {x: 21.5625, y: -1}
+      - {x: 21.437502, y: -1}
+      - {x: 21, y: -2}
+      - {x: 22, y: -2}
+    - - {x: 22.5625, y: -1}
+      - {x: 22.437502, y: -1}
+      - {x: 22, y: -2}
+      - {x: 23, y: -2}
+    - - {x: 23.5625, y: -1}
+      - {x: 23.437502, y: -1}
+      - {x: 23, y: -2}
       - {x: 24, y: -2}
-    - - {x: 33, y: -1.25}
-      - {x: 28, y: -1.25}
+    - - {x: 28.5625, y: -1}
+      - {x: 28.437502, y: -1}
       - {x: 28, y: -2}
+      - {x: 29, y: -2}
+    - - {x: 29.5625, y: -1}
+      - {x: 29.437502, y: -1}
+      - {x: 29, y: -2}
+      - {x: 30, y: -2}
+    - - {x: 30.5625, y: -1}
+      - {x: 30.437502, y: -1}
+      - {x: 30, y: -2}
+      - {x: 31, y: -2}
+    - - {x: 31.5625, y: -1}
+      - {x: 31.437502, y: -1}
+      - {x: 31, y: -2}
+      - {x: 32, y: -2}
+    - - {x: 32.5625, y: -1}
+      - {x: 32.4375, y: -1}
+      - {x: 32, y: -2}
       - {x: 33, y: -2}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0
@@ -4212,6 +4320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f98f322e66e50459c0d97aaadf3a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onlyUp: 0
   _damage: 5
   _isResetPos: 1
 --- !u!4 &5860582055514406680
@@ -38880,6 +38989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f98f322e66e50459c0d97aaadf3a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onlyUp: 0
   _damage: 5
   _isResetPos: 1
 --- !u!1 &8842663227410265093
