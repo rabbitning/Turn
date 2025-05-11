@@ -16,7 +16,6 @@ public class FragileTileController : EffectByViewChange
 
     void Awake()
     {
-        // _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
         _col = GetComponent<Collider2D>();
         if (TryGetComponent(out _effector)) _originalSurfaceArc = _effector.surfaceArc;
@@ -25,7 +24,7 @@ public class FragileTileController : EffectByViewChange
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!IsSS) return;
-        if (collision.gameObject.CompareTag("Player") && collision.contacts[0].normal.y < 0)
+        if (collision.gameObject.CompareTag("Player") && collision.contacts[0].normal.y < -0.01f)
         {
             StartCoroutine(BreakTile());
         }
@@ -33,6 +32,7 @@ public class FragileTileController : EffectByViewChange
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (IsSS) return;
         if (other.CompareTag("Player"))
         {
             StartCoroutine(BreakTile());
@@ -43,14 +43,14 @@ public class FragileTileController : EffectByViewChange
     {
         base.OnSS();
         if (_col.isTrigger) _col.enabled = false;
-        else _effector.surfaceArc = _originalSurfaceArc;
+        else if (_effector != null) _effector.surfaceArc = _originalSurfaceArc;
     }
 
     protected override void OnTD()
     {
         base.OnTD();
         if (_col.isTrigger) _col.enabled = true;
-        else _effector.surfaceArc = 360;
+        else if (_effector != null) _effector.surfaceArc = 360;
     }
 
     IEnumerator BreakTile()
@@ -98,8 +98,9 @@ public class FragileTileController : EffectByViewChange
             yield return null;
         }
         _spriteRenderer.color = _originalColor;
-        if (_col.isTrigger && IsSS) _col.enabled = false;
-        else _col.enabled = true;
+        // if (_col.isTrigger && IsSS) _col.enabled = false;
+        // else
+        _col.enabled = true;
 
         _isBreaking = false;
     }

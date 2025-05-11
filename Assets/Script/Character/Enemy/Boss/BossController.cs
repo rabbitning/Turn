@@ -45,6 +45,8 @@ public class BossController : Character, IDamageable
     Vector2 _originalPosition = Vector2.zero;
     float _attackTimer = 0f;
 
+    [SerializeField] MenuUIController _menuUIController = null;
+
     protected override void Awake()
     {
         base.Awake();
@@ -134,7 +136,8 @@ public class BossController : Character, IDamageable
             }
             else
             {
-                Destroy(gameObject, 0.5f);
+                _animator.SetTrigger("Die");
+                CanMove = false;
             }
         }
         else
@@ -148,6 +151,11 @@ public class BossController : Character, IDamageable
         _spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         _spriteRenderer.color = _originalColor;
+    }
+
+    void PlayerWin()
+    {
+        _menuUIController.Win();
     }
 
     void PerformAttack()

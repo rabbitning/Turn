@@ -13,6 +13,7 @@ public class DoorController : MonoBehaviour
     BoxCollider2D _doorUpCol = null;
     [SerializeField] SpriteRenderer _doorDown = null;
     BoxCollider2D _doorDownCol = null;
+    [SerializeField] SpriteRenderer _doorSign = null;
 
     [Header("Door Setting")]
 
@@ -37,6 +38,7 @@ public class DoorController : MonoBehaviour
         _doorMask.localScale = new Vector3(_doorMask.localScale.x, _openSize * 2, _doorMask.localScale.z);
         _doorUp.size = new Vector2(_doorUp.size.x, _openSize);
         _doorDown.size = new Vector2(_doorDown.size.x, _openSize);
+        _doorSign.size = new Vector2(_doorMask.localScale.y, _doorSign.size.y);
 
         _doorUpCol = _doorUp.GetComponent<BoxCollider2D>();
         _doorUpCol.size = new Vector2(_doorUpCol.size.x, _openSize);

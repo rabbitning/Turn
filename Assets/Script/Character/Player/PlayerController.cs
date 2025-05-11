@@ -286,19 +286,22 @@ public class PlayerController : Character, IDamageable
 
     IEnumerator CResetPlayerPosition(Vector2 newPosition)
     {
+        float elapsedTime = 0f;
+        float duration = 0.4f;
+        SetCurrentStatsData(StatName.Invincible, 1);
+        // StartCoroutine(CSetInvincible(duration * 3f));
+
+        _col.enabled = false;
+        _rb.velocity = Vector2.zero;
+        _rb.bodyType = RigidbodyType2D.Kinematic;
         _inputData.CanInput = false;
         ResetInput();
         transform.SetParent(null);
-        _rb.velocity = Vector2.zero;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(duration);
 
-        float elapsedTime = 0f;
-        float duration = 0.5f;
         Vector2 startingPosition = transform.position;
 
-        StartCoroutine(CSetInvincible(duration));
-        _col.enabled = false;
         while (elapsedTime < duration)
         {
             transform.position = Vector2.Lerp(startingPosition, newPosition, elapsedTime / duration);
@@ -307,10 +310,13 @@ public class PlayerController : Character, IDamageable
         }
         transform.position = newPosition;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(duration);
 
         _col.enabled = true;
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+        _rb.velocity = Vector2.zero;
         _inputData.CanInput = true;
+        SetCurrentStatsData(StatName.Invincible, 0);
     }
 
     // public void UpdateChips(Chips[] newChips)
@@ -407,17 +413,26 @@ public class PlayerController : Character, IDamageable
 
         if (CurrentStatsData[StatName.Health] <= 0)
         {
-            GameManager.Instance.GameOver();
+            CanMove = false;
+            ResetInput();
+            _rb.velocity = Vector2.zero;
+            _animator.SetTrigger("Die");
         }
+    }
+
+    void Die()
+    {
+        GameManager.Instance.GameOver();
     }
 
     IEnumerator CSetInvincible(float duration)
     {
-        CurrentStatsData[StatName.Invincible] = 1;
+        if (CurrentStatsData[StatName.Invincible] != 0) yield break;
+        SetCurrentStatsData(StatName.Invincible, 1);
 
         yield return new WaitForSeconds(duration);
 
-        CurrentStatsData[StatName.Invincible] = 0;
+        SetCurrentStatsData(StatName.Invincible, 0);
     }
 
     void CheckInvincible()

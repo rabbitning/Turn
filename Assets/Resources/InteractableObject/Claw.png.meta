@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a0c0e01858684d94a9384035d43da879
+guid: 5c6fd0f4caec23b49a2a41d63718fa01
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -105,85 +105,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerAttackEffectTD_0
+      name: Claw_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+        width: 16
+        height: 384
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7846b68249610ef48ac9f39cd9db0b49
-      internalID: -345767758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackEffectTD_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 869b28224a6938d47bcdc258ecd0760d
-      internalID: -459641727
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackEffectTD_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c40831eff56014449b10faaacb2ded46
-      internalID: -1333694790
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackEffectTD_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64bdea9b4963d66488807323fcbaecb4
-      internalID: 2011278557
+      spriteID: fdfe3ac40117a2d4e8af7b1d3e8b48ec
+      internalID: -231241034
       vertices: []
       indices: 
       edges: []
@@ -199,10 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerAttackEffectTD_3: 2011278557
-      PlayerAttackEffectTD_1: -459641727
-      PlayerAttackEffectTD_2: -1333694790
-      PlayerAttackEffectTD_0: -345767758
+      Claw_0: -231241034
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

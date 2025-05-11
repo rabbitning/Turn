@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a0c0e01858684d94a9384035d43da879
+guid: fde144d2c7c83c64492b7423e94eebbf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,91 +103,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: PlayerAttackEffectTD_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7846b68249610ef48ac9f39cd9db0b49
-      internalID: -345767758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackEffectTD_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 869b28224a6938d47bcdc258ecd0760d
-      internalID: -459641727
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackEffectTD_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c40831eff56014449b10faaacb2ded46
-      internalID: -1333694790
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackEffectTD_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 16
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64bdea9b4963d66488807323fcbaecb4
-      internalID: 2011278557
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -198,11 +114,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      PlayerAttackEffectTD_3: 2011278557
-      PlayerAttackEffectTD_1: -459641727
-      PlayerAttackEffectTD_2: -1333694790
-      PlayerAttackEffectTD_0: -345767758
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
