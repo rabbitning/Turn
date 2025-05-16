@@ -3,7 +3,7 @@ using UnityEngine;
 public class BulletController : EffectByViewChange
 {
     [SerializeField] float _lifeTime = 0;
-    [HideInInspector] public float Damage = 0;
+    public float Damage = 0;
     Rigidbody2D _rb;
 
     protected override void Start()
@@ -27,8 +27,9 @@ public class BulletController : EffectByViewChange
             {
                 enemy.Knockback(_rb.velocity.normalized, Damage * 2);
             }
+            End();
         }
-        End();
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) End();
     }
 
     void End()

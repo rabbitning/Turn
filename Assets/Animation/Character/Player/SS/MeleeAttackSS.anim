@@ -74,6 +74,13 @@ AnimationClip:
     path: 
     classID: 212
     script: {fileID: 0}
+  - curve:
+    - time: 0.41666666
+      value: {fileID: -118193899, guid: 081301d65a7adc44dbef7ae12547bdb7, type: 3}
+    attribute: m_Sprite
+    path: MeleeAttackSS
+    classID: 212
+    script: {fileID: 0}
   m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
@@ -95,6 +102,13 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 4190435067
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 740531235, guid: d3488b420d8652140a63bc4da08b1f82, type: 3}
     - {fileID: -215751318, guid: d3488b420d8652140a63bc4da08b1f82, type: 3}
@@ -103,6 +117,7 @@ AnimationClip:
     - {fileID: -955677663, guid: d3488b420d8652140a63bc4da08b1f82, type: 3}
     - {fileID: 1899801883, guid: d3488b420d8652140a63bc4da08b1f82, type: 3}
     - {fileID: -894850585, guid: d3488b420d8652140a63bc4da08b1f82, type: 3}
+    - {fileID: -118193899, guid: 081301d65a7adc44dbef7ae12547bdb7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

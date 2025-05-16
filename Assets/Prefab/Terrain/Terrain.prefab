@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f98f322e66e50459c0d97aaadf3a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 5
   _isResetPos: 1
 --- !u!1 &8986475816604481217
 GameObject:
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f98f322e66e50459c0d97aaadf3a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 5
   _isResetPos: 1
 --- !u!1 &8986475817965122988
 GameObject:

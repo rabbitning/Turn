@@ -34,14 +34,7 @@ public class CMvcamController : EffectByViewChange
 
     protected override void ViewChanged(bool isSS)
     {
-        if (isSS)
-        {
-            _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = 0;
-        }
-        else
-        {
-            _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = 0.09f;
-        }
+        _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = isSS ? 0 : 0.15f;
     }
 
     public void CameraShake(float intesity, float duration)

@@ -8,6 +8,7 @@ public class GameManager : EffectByViewChange
     public static GameManager Instance { get; private set; }
     public PlayerController Player { get; private set; }
     [HideInInspector] public UnityEvent<bool> OnViewChanged = new();
+    [HideInInspector] public bool IsPaused = false;
     [SerializeField] bool _isSideScroll = true;
     public bool GetView() => _isSideScroll;
     public void SetView(bool nextView)
@@ -62,7 +63,13 @@ public class GameManager : EffectByViewChange
 
     void Update()
     {
-        HandleInput();
+        if(Input.GetKeyDown(KeyCode.F1)) Player.SetCurrentStatsData(StatName.Health, Player.CurrentStatsData[StatName.MaxHealth]); // full health
+        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // refresh scene
+        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1); // previous scene
+        if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // next scene
+
+        if (IsPaused) return;
+        // HandleInput();
 
         _viewChangeCooldownTimer += Time.deltaTime;
     }
@@ -81,14 +88,14 @@ public class GameManager : EffectByViewChange
         _viewChangeCooldownTimer = 0;
     }
 
-    void HandleInput()
-    {
-        if (Time.timeScale == 0) return;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            SetView(!_isSideScroll);
-        }
-    }
+    // void HandleInput()
+    // {
+    //     if (Time.timeScale == 0) return;
+    //     if (Input.GetKeyDown(KeyCode.LeftShift))
+    //     {
+    //         SetView(!_isSideScroll);
+    //     }
+    // }
 
     public void Win()
     {
@@ -103,9 +110,9 @@ public class GameManager : EffectByViewChange
 
     IEnumerator CLoadScene(int SceneIndex, float delay = 0f)
     {
-        Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(delay);
+        // Time.timeScale = 0;
         SceneManager.LoadScene(SceneIndex);
-        Time.timeScale = 1;
+        // Time.timeScale = 1;
     }
 }
